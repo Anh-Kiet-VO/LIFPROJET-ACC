@@ -9,6 +9,8 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+const jwt = require("jsonwebtoken");
+
 const fetch = require('node-fetch');
 
 const app = express();
@@ -66,9 +68,31 @@ app.get("/login", (req, res) => {
 	}
 })
 
+const verifiyJWT = (req, res, next) => {
+	const token = req.headers["x-access-token"]
+
+	if(!token) {
+		res.send("Besoin d'un token, envoyez le nous la prochaine fois");
+	} else {
+		jwt.verify(token, "jwtSecret", (err, decoded) => {
+			if (err) {
+				res.json({auth: false, message : "Echec de l'authentification"});
+			} else {
+				req.userId = decoded.id;
+				next();
+			}
+		})
+	}
+}
+
+app.get("/isUserAuth", verifiyJWT, (req, res) => {
+	res.send("Bien connecté")
+})
+
 app.get("/", (req, res) => {
 	res.send('AAAAA');
 })
+
 /*
 app.post('/login', (req, res) => {
 	const email = req.body.email;
@@ -105,14 +129,19 @@ app.post('/login', (req, res) => {
 			if(result.length > 0) {
 				bcrypt.compare(password, result[0].password, (err, response) => {
 					if(response) {
-						req.session.user = result	;	
-						res.send(result);
+						const id = result[0].id;
+						const token = jwt.sign({id}, "jwtSecret", {
+							expiresIn: 300, 
+						})
+						req.session.user = result;
+
+						res.json({auth: true, token: token, result: result});
 					} else {
-						res.send( { message : "Wrong email/password combination!" });
+						res.json({auth: false, message : "Wrong username/password combination"});
 					}
 				});	
 			} else {
-				res.send( { message : "User doesn't exist" });
+				res.json({auth: false, message : "No user exist"});
 			}
 		}
 	);
@@ -122,42 +151,3 @@ app.post('/login', (req, res) => {
 app.listen(3001, () => {
 	console.log("Server running on port 3001");
 });
-
-
-const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
-const BASE_URL = "https://api.themoviedb.org/3";
-const API_URL = BASE_URL + '/discover/movie?' + API_KEY; /*+ '&sort_by=popularity.desc&page=1'*/ 
-
-const MOVIE_ID = '634649';
-const API_URL_DETAILS = BASE_URL + '/movie/' + MOVIE_ID + '?' + API_KEY/*+ '&sort_by=popularity.desc&page=1'*/ 
-const API_URL_CREDITS = BASE_URL + '/movie/' + MOVIE_ID + '/credits?' + API_KEY;
-
-const IMG_URL = 'https://image.tmdb.org/t/p/w200';
-const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
-
-const SEARCH_URL = BASE_URL + '/search/movie?'+ API_KEY;
-
-getMovieInfo(API_URL_DETAILS, API_URL_CREDITS);
-
-function getMovieInfo(url1, url2) {
-	fetch(url1).then(res => res.json()).then(data1 => {
-	  
-	  //let datastring= JSON.stringify(data1)
-	  //let json = JSON.parse(datastring);
-	  //let myJson = {budget: json.title, releaseDate: json.release_date, overview: json.overview, popularity: json.popularity}
-  
-	  console.log("detail");
-  
-	  //showMovieDetails(data1);
-	  
-	})
-	fetch(url2).then(res => res.json()).then(data2 => {
-		console.log("credits");
-	})
-}
-
-function getMovies(url) {
-    fetch(url).then(res => res.json()).then(data => {
-       console.log(data.result);
-    })
-}

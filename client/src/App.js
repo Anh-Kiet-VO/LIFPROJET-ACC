@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Axios from "axios";
 import "./App.css";
-import axios from "axios";
 import Card from './components/card';
+import Register from './components/register';
+import Login from './components/login'
 
+import Moviedetails from "./pages/moviedetails";
 
 function App() {
 
@@ -13,7 +16,13 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [loginStatus, setLoginStatus] = useState('');
+  const [loginStatus, setLoginStatus] = useState(false);
+
+  const [isActive, setActive] = useState("false");
+
+  const displayRegister = () => {
+    setActive(!isActive);
+  };
 
   Axios.defaults.withCredentials = true;
 
@@ -23,7 +32,6 @@ function App() {
       password: passwordReg,
     }).then((response) => {
       console.log(response)
-      console.log("caca")
     });
   };
 
@@ -32,21 +40,32 @@ function App() {
       email: email,
       password: password,
     }).then((response) => {
-      if(response.data.message) {
-        setLoginStatus(response.data.message);
+      if(!response.data.auth) {
+        
+        setLoginStatus(false);
       } else {
-        setLoginStatus(response.data[0].email);
+        localStorage.setItem("token", response.data.token);
+        setLoginStatus(true);
       }
     });
   };
 
-  useEffect(() => {
-    Axios.get("http://localhost:3001/login").then((response) => {
-      if(response.data.loggedIn === true) {
-        setLoginStatus(response.data[0].email);
-      }
+  const userAuthenticated = () => {
+    Axios.get("http://localhost:3001/isUserAuth", {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    }).then((response) => {
+      console.log(response);
     })
-  }, [])
+  }
+  const [movieId, setMovieId] = useState('');
+
+
+  const getMovieInfo = (e) => {
+    const getId = e.currentTarget.attributes.id.value;
+    setMovieId(getId);
+  }
 
   const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
   const BASE_URL = "https://api.themoviedb.org/3";
@@ -73,21 +92,22 @@ function App() {
     .then(res => res.json())
     .then(data => {
       setData(data);
-      
     });
   }
-
 
   const createCard = (movie) => {
     return (
       <Card
+        getMovieInfo = {getMovieInfo}
         key = {movie.id}
         title = {movie.title}
         score = {movie.vote_average}
         url = {IMG_URL_POSTER + movie.poster_path}
+        id = {movie.id}
       />
     )
   }
+  
 
   /*const loadMovieDetails =  async () => {
     await fetch(API_URL_CREDITS)
@@ -124,28 +144,53 @@ function App() {
           createCard(movie)
         ))
       }
+      <BrowserRouter>
+
+        <Routes>
+          <Route exact path="/details" element={<Moviedetails/>}></Route>
+        </Routes>
+      </BrowserRouter>
+      
       
 
-      <div className="registration">
-        <h1>Registration</h1>
-        <label>Email</label>
-        <input
-          type="email"
-          onChange={(e) => {
-            setEmailReg(e.target.value);
-          }}
-        />
-        <label>Password</label>
-        <input
-          type="text"
-          onChange={(e) => {
-            setPasswordReg(e.target.value);
-          }}
-        />
-        <button onClick={register}>Register</button>
-      </div>
+      {/* <div className="registration">
+      <div className={isActive? "hidden" : ""} id="register-modal">
+          <h1>Registration</h1>
+          <label>Email</label>
+          <input
+            type="email"
+            onChange={(e) => {
+              setEmailReg(e.target.value);
+            }}
+          />
+          <label>Password</label>
+          <input
+            type="text"
+            onChange={(e) => {
+              setPasswordReg(e.target.value);
+            }}
+          />
+          <button onClick={register}>Register</button>
+        </div>
+        
+        <button onClick={displayRegister}>S'inscrire</button>
+      </div> */}
 
-      <div className="Login">
+      <Register
+        setEmailReg = {setEmailReg}
+        setPasswordReg = {setPasswordReg}
+        register = {register}
+      />
+
+      <Login
+        setEmail = {setEmail}
+        setPassword = {setPassword}
+        login = {login}
+        loginStatus = {loginStatus}
+        userAuthenticated = {userAuthenticated}
+      />
+
+      {/*<div className="Login">
         <h1>Login</h1>
         <input
           type="email"
@@ -164,7 +209,10 @@ function App() {
         <button onClick={login}>Login</button>
       </div>
 
-      <h1>{loginStatus}</h1>
+      {loginStatus && (
+        <button onClick={userAuthenticated}>Check if authenticate</button>
+      )}}*/}
+      
     </div>
   );
 }
