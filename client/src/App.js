@@ -65,6 +65,7 @@ function App() {
   const getMovieInfo = (e) => {
     const getId = e.currentTarget.attributes.id.value;
     setMovieId(getId);
+    console.log(getId);
   }
 
   const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
@@ -114,7 +115,7 @@ function App() {
     .then(res => res.json())
     .then(data => {
       
-      setData(data);
+      setData(data);  
       console.log(data.results[0]);
     });
   }*/
@@ -145,7 +146,6 @@ function App() {
         ))
       }
       <BrowserRouter>
-
         <Routes>
           <Route exact path="/details" element={<Moviedetails/>}></Route>
         </Routes>
