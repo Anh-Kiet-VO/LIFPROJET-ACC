@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "./App.css";
 import axios from "axios";
+import CompSheet from './components/CompSheet';
 import Card from './components/card';
 
 
@@ -73,10 +74,21 @@ function App() {
     .then(res => res.json())
     .then(data => {
       setData(data);
-      
     });
   }
 
+  const createSheet = (media) => {
+    return (
+      <CompSheet 
+        key = {media.id}
+        id = {media.id}
+        title = {media.title}
+        description = {media.overview}
+        score = {media.vote_average}
+        url_img = {IMG_URL_POSTER + media.poster_path}
+      />
+    )
+}
 
   const createCard = (movie) => {
     return (
@@ -109,9 +121,34 @@ function App() {
     });
   }*/
   
+  /*
+  return (
+    <div className="App">
+      {
+        data.results?.map(movie => (
+          createCard(movie)
+        ))
+      }
+
+    </div>
+  );
+  */
 
   return (
     <div className="App">
+      {
+        data.results?.map(movie => (
+          createCard(movie)
+        ))
+      }
+    </div>
+  );
+  
+  //PREMIER RETURN
+
+  /* return (
+    <div className="App">
+      
       {
         data.results?.map(movie => (
           <div key={movie.id}><li>{movie.title}</li></div>
@@ -124,7 +161,6 @@ function App() {
           createCard(movie)
         ))
       }
-      
 
       <div className="registration">
         <h1>Registration</h1>
@@ -166,7 +202,7 @@ function App() {
 
       <h1>{loginStatus}</h1>
     </div>
-  );
+  ); */
 }
 
 export default App;
