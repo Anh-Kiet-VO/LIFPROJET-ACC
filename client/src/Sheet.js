@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import "../App.css";
-import Card from '../components/card';
-
-import Moviedetails from "./moviedetails";
-
-function Index() {
-  const [movieId, setMovieId] = useState('');
+import Axios from "axios";
+import "./Sheet.css";
+import axios from "axios";
+import CompSheet from './components/CompSheet';
+import Card from './components/card';
 
 
-  const getMovieInfo = (e) => {
-    const getId = e.currentTarget.attributes.id.value;
-    setMovieId(getId);
-  }
+function Sheet() {
 
   const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
   const BASE_URL = "https://api.themoviedb.org/3";
@@ -39,39 +33,64 @@ function Index() {
     .then(res => res.json())
     .then(data => {
       setData(data);
+      console.log(data.results[0]);
     });
+  }
+
+  const loadMovieDetails = async () => {
+    await fetch(API_URL_CREDITS)
+    .then(res => res.json())
+    .then(data => {
+      setData(data);
+      console.log(data.results[0]);
+    });
+  }
+
+   /*<CompSheet 
+          key = {media.id}
+          id = {media.id}
+          title = {media.title}
+          description = {media.overview}
+          score = {media.vote_average}
+          url_img = {IMG_URL_POSTER + media.poster_path}
+        />*/
+
+  const createSheet = (media) => {
+      return (
+        <CompSheet 
+          key = {media.id}
+          title = {media.title}
+          description = {media.overview}
+          date = {media.release_date}
+          genres = {media.genre_ids}
+          score = {media.vote_average}
+          url_img = {IMG_URL_POSTER + media.poster_path}
+        />
+      )
   }
 
   const createCard = (movie) => {
     return (
       <Card
-        getMovieInfo = {getMovieInfo}
         key = {movie.id}
         title = {movie.title}
         score = {movie.vote_average}
         url = {IMG_URL_POSTER + movie.poster_path}
-        id = {movie.id}
       />
     )
   }
   
-
   return (
-    <div className="index">
+    <div className="Sheet">
       {
-        data.results?.map(movie => (
-          <div key={movie.id}><li>{movie.title}</li></div>
-          
-        ))
-      } 
-
-      {
-        data.results?.map(movie => (
+        //createSheet(data.results[1])
+        /*data.results?.map(movie => (
           createCard(movie)
-        ))
+        ))*/
+        data.results ? createSheet(data.results[0]) : null
       }
     </div>
   );
 }
 
-export default Index;
+export default Sheet;
