@@ -3,7 +3,7 @@ import Card from '../components/card';
 
 import '../App.css';
 
-function Moviedetails() {
+function Moviedetails({match}) {
   const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
   const BASE_URL = "https://api.themoviedb.org/3";
   const API_URL = BASE_URL + '/discover/movie?' + API_KEY + '&sort_by=popularity.desc&page=1' /*+ '&sort_by=popularity.desc&page=1'*/ 
@@ -16,11 +16,13 @@ function Moviedetails() {
   const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
   
   const SEARCH_URL = BASE_URL + '/search/movie?'+ API_KEY;
+  //https://api.themoviedb.org/3/discover/movie?api_key=5ffad13612113d1554cbf7d1788c806c
 
   const [data, setData] = useState([]);
-
-  useEffect( () => {
+  //await fetch(`https://api.themoviedb.org/3/movie/${match.id}api_key=5ffad13612113d1554cbf7d1788c806c`)
+  useEffect(() => {
     loadMovieData();
+    console.log(match)
   }, [])
 
   const loadMovieData = async () => {
@@ -33,7 +35,8 @@ function Moviedetails() {
 
   return(
     <div className='movie-details'>
-      <Card/>
+      <Card />
+      <h1>AAAAAAAAA</h1>
     </div>
   )
 }

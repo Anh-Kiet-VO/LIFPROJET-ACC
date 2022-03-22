@@ -7,6 +7,7 @@ import Register from './components/register';
 import Login from './components/login'
 
 import Moviedetails from "./pages/moviedetails";
+import Index from "./pages/index";
 
 function App() {
 
@@ -65,9 +66,8 @@ function App() {
   const getMovieInfo = (e) => {
     const getId = e.currentTarget.attributes.id.value;
     setMovieId(getId);
-    console.log(getId);
   }
-
+  
   const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
   const BASE_URL = "https://api.themoviedb.org/3";
   const API_URL = BASE_URL + '/discover/movie?' + API_KEY + '&sort_by=popularity.desc&page=1' /*+ '&sort_by=popularity.desc&page=1'*/ 
@@ -100,6 +100,7 @@ function App() {
     return (
       <Card
         getMovieInfo = {getMovieInfo}
+        movieIdDetail = {movieId}
         key = {movie.id}
         title = {movie.title}
         score = {movie.vote_average}
@@ -140,14 +141,16 @@ function App() {
         ))
       } 
 
+      
+      <BrowserRouter>
       {
         data.results?.map(movie => (
           createCard(movie)
         ))
       }
-      <BrowserRouter>
         <Routes>
-          <Route exact path="/details" element={<Moviedetails/>}></Route>
+          <Route exact path="/index" element={<Index/>}></Route>
+          <Route exact path="/detail/:id" element={<Moviedetails/>}></Route>
         </Routes>
       </BrowserRouter>
       
