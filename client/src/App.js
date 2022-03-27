@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Axios from "axios";
 import "./App.css";
 import Card from './components/card';
@@ -7,10 +7,12 @@ import Register from './components/register';
 import Login from './components/login'
 
 import Moviedetails from "./pages/moviedetails";
+import Movie from "./pages/movie"
+import Home from "./pages/Home"
+import Navbar from "./components/Navbar";
 
 function App() {
-
-  const [emailReg, setEmailReg] = useState('');
+  /*const [emailReg, setEmailReg] = useState('');
   const [passwordReg, setPasswordReg] = useState('');
 
   const [email, setEmail] = useState('');
@@ -58,100 +60,19 @@ function App() {
     }).then((response) => {
       console.log(response);
     })
-  }
-  const [movieId, setMovieId] = useState('');
-
-
-  const getMovieInfo = (e) => {
-    const getId = e.currentTarget.attributes.id.value;
-    setMovieId(getId);
-    console.log(getId);
-  }
-
-  const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
-  const BASE_URL = "https://api.themoviedb.org/3";
-  const API_URL = BASE_URL + '/discover/movie?' + API_KEY + '&sort_by=popularity.desc&page=1' /*+ '&sort_by=popularity.desc&page=1'*/ 
-  
-  const MOVIE_ID = '634649';
-  const API_URL_DETAILS = BASE_URL + '/movie/' + MOVIE_ID + '?' + API_KEY
-  const API_URL_CREDITS = BASE_URL + '/movie/' + MOVIE_ID + '/credits?' + API_KEY;
-  
-  const IMG_URL = 'https://image.tmdb.org/t/p/w200';
-  const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
-  
-  const SEARCH_URL = BASE_URL + '/search/movie?'+ API_KEY;
-  //https://api.themoviedb.org/3/discover/movie?api_key=5ffad13612113d1554cbf7d1788c806c
-
-  const [data, setData] = useState([]);
-
-  useEffect( () => {
-    loadMovieData();
-  }, [])
-
-  const loadMovieData = async () => {
-    await fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      setData(data);
-    });
-  }
-
-  const createCard = (movie) => {
-    return (
-      <Card
-        getMovieInfo = {getMovieInfo}
-        key = {movie.id}
-        title = {movie.title}
-        score = {movie.vote_average}
-        url = {IMG_URL_POSTER + movie.poster_path}
-        id = {movie.id}
-      />
-    )
-  }
-  
-
-  /*const loadMovieDetails =  async () => {
-    await fetch(API_URL_CREDITS)
-    .then(res => res.json())
-    .then(data => {
-      
-      setData(data);  
-      console.log(data.results[0]);
-    });
   }*/
-/*
-  const loadData =   () => {
-    axios.get('https://api.themoviedb.org/3/discover/movie?api_key=5ffad13612113d1554cbf7d1788c806c')
-    .then(res => res.json())
-    .then(data => {
-      
-      setData(data);
-      console.log(data.results[0]);
-    });
-  }*/
-  
-
   return (
     <div className="App">
-      {
-        data.results?.map(movie => (
-          <div key={movie.id}><li>{movie.title}</li></div>
-          
-        ))
-      } 
-
-      {
-        data.results?.map(movie => (
-          createCard(movie)
-        ))
-      }
+      
       <BrowserRouter>
+      <Navbar />
         <Routes>
-          <Route exact path="/details" element={<Moviedetails/>}></Route>
+
+          <Route path="/detail/:id" element={<Moviedetails/>}></Route>
+          <Route path="/" element={<Home/>}></Route>
+          <Route path="/movie" element={<Movie/>}></Route>
         </Routes>
       </BrowserRouter>
-      
-      
 
       {/* <div className="registration">
       <div className={isActive? "hidden" : ""} id="register-modal">
@@ -176,7 +97,7 @@ function App() {
         <button onClick={displayRegister}>S'inscrire</button>
       </div> */}
 
-      <Register
+      { /*<Register
         setEmailReg = {setEmailReg}
         setPasswordReg = {setPasswordReg}
         register = {register}
@@ -188,7 +109,7 @@ function App() {
         login = {login}
         loginStatus = {loginStatus}
         userAuthenticated = {userAuthenticated}
-      />
+    />*/ } 
 
       {/*<div className="Login">
         <h1>Login</h1>
@@ -212,7 +133,6 @@ function App() {
       {loginStatus && (
         <button onClick={userAuthenticated}>Check if authenticate</button>
       )}}*/}
-      
     </div>
   );
 }
