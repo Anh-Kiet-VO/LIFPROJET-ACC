@@ -10,7 +10,6 @@ const Moviedetails = () => {
 
 	const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
 	const BASE_URL = "https://api.themoviedb.org/3";
-	const API_URL = BASE_URL + '/discover/movie?' + API_KEY + '&sort_by=popularity.desc&page=1' /*+ '&sort_by=popularity.desc&page=1'*/
 
 	const LANGUAGE = '&language=fr';
 

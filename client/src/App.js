@@ -4,11 +4,12 @@ import Axios from "axios";
 import "./App.css";
 import Card from './components/card';
 import Register from './components/register';
-import Login from './components/login'
+import Login from './components/login';
 
 import Moviedetails from "./pages/moviedetails";
-import Movie from "./pages/movie"
-import Home from "./pages/Home"
+import Movie from "./pages/movie";
+import Tv from "./pages/Tv";
+import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
 					<Route path="/detail/:id" element={<Moviedetails />}></Route>
 					<Route path="/" element={<Home />}></Route>
 					<Route path="/movie" element={<Movie />}></Route>
+					<Route path="/tv" element={<Tv />}></Route>
 				</Routes>
 			</BrowserRouter>
 

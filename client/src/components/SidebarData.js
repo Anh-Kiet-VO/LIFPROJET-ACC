@@ -13,7 +13,13 @@ export const SidebarData = [
 	{
 		title: 'Movie',
 		path: '/Movie',
-		icon: <RiIcons.RiMovie2Line/>,
+		icon: <RiIcons.RiMovie2Line />,
+		cName: 'nav-text'
+	},
+	{
+		title: 'TV',
+		path: '/TV',
+		icon: <RiIcons.RiMovie2Line />,
 		cName: 'nav-text'
 	}
 ]
