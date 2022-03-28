@@ -7,7 +7,7 @@ const Search = () => {
 
 	const [data, setData] = useState([]);
 
-	const [search, setSearch] = useState("");
+	const [search, setSearch] = useState(".");
 
 	const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
 	const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
