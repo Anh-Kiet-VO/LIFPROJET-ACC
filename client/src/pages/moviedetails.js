@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import CompSheet from '../components/CompSheet';
+import CompSheetMovieCredits from "../components/CompSheetMovieCredits";
+
 import '../App.css';
 
 const Moviedetails = () => {
@@ -24,6 +26,8 @@ const Moviedetails = () => {
 
 	const [data, setData] = useState([]);
 
+	const [credits, setCredits] = useState([]);
+
 	useEffect(() => {
 		loadMovieData();
 	}, [])
@@ -37,11 +41,11 @@ const Moviedetails = () => {
 			});
 	}
 
-	const loadMovieDetails = async () => {
+	const loadMovieCredits = async () => {
 		await fetch(API_URL_CREDITS)
 			.then(res => res.json())
-			.then(data => {
-				setData(data);
+			.then(credits => {
+				setCredits(credits);
 			});
 	}
 
@@ -60,6 +64,14 @@ const Moviedetails = () => {
 		)
 	}
 
+	const createSheetMovieCredits = (media) => {
+		return (
+			<CompSheetMovieCredits
+			// A faire en fonction des crédits qu'on veut afficher
+			/>
+		)
+	}
+
 	return (
 		<div className="Sheet">
 			{
@@ -68,7 +80,7 @@ const Moviedetails = () => {
 				  createCard(movie)
 				))*/
 				data ? createSheet(data) : null
-
+				// credits ? createSheetMovieCredits(credits) : null
 			}
 		</div>
 	);
