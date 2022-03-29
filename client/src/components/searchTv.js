@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Card from "../components/card"
+import CardMovie from "./cardMovie"
 
 const SearchTv = () => {
 
@@ -35,7 +35,7 @@ const SearchTv = () => {
 
 	const createCard = (movie) => {
 		return (
-			<Card
+			<CardMovie
 				id={movie.id}
 				key={movie.id}
 				getMovieInfo={getMovieInfo}

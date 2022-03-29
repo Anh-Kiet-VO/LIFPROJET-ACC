@@ -6,7 +6,7 @@ import Search from "../components/search";
 
 import "../App.css";
 
-import Card from '../components/card';
+import CardMovie from '../components/cardMovie';
 
 function Movie() {
 
@@ -46,7 +46,7 @@ function Movie() {
 
 	const createCard = (movie) => {
 		return (
-			<Card
+			<CardMovie
 				id={movie.id}
 				key={movie.id}
 				getMovieInfo={getMovieInfo}

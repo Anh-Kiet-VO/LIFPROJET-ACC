@@ -6,7 +6,7 @@ import SearchTv from "../components/searchTv";
 
 import "../App.css";
 
-import Card from '../components/card';
+import CardTv from '../components/cardTv';
 
 function Tv() {
 
@@ -19,8 +19,7 @@ function Tv() {
 	const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
 	const LANGUAGE = '&language=fr';
 
-	const BASE_URL = "https://api.themoviedb.org/3";
-	const API_URL = BASE_URL + '/discover/tv?' + API_KEY + `&sort_by=popularity.desc&page=${page}` + LANGUAGE;/*+ '&sort_by=popularity.desc&page=1'*/
+	const API_URL = 'https://api.themoviedb.org/3/discover/tv?' + API_KEY + `&sort_by=popularity.desc&page=${page}` + LANGUAGE;/*+ '&sort_by=popularity.desc&page=1'*/
 
 	const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 
@@ -43,7 +42,7 @@ function Tv() {
 
 	const createCard = (movie) => {
 		return (
-			<Card
+			<CardTv
 				id={movie.id}
 				key={movie.id}
 				getMovieInfo={getMovieInfo}

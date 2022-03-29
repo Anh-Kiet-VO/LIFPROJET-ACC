@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Axios from "axios";
 import "./App.css";
-import Card from './components/card';
+import CardMovie from './components/cardMovie';
 import Register from './components/register';
 import Login from './components/login';
 
 import Moviedetails from "./pages/moviedetails";
+import Tvdetails from "./pages/tvdetails"
 import Movie from "./pages/movie";
 import Tv from "./pages/Tv";
 import Home from "./pages/Home";
@@ -70,7 +71,8 @@ function App() {
 				<Navbar />
 				<Routes>
 
-					<Route path="/detail/:id" element={<Moviedetails />}></Route>
+					<Route path="/detailMovie/:id" element={<Moviedetails />}></Route>
+					<Route path="/detailTv/:id" element={<Tvdetails />}></Route>
 					<Route path="/" element={<Home />}></Route>
 					<Route path="/movie" element={<Movie />}></Route>
 					<Route path="/tv" element={<Tv />}></Route>
