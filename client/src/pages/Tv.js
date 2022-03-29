@@ -18,10 +18,7 @@ function Tv() {
 
 	const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
 	const LANGUAGE = '&language=fr';
-
 	const API_URL = 'https://api.themoviedb.org/3/discover/tv?' + API_KEY + `&sort_by=popularity.desc&page=${page}` + LANGUAGE;/*+ '&sort_by=popularity.desc&page=1'*/
-
-	const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 
 	const getMovieInfo = (e) => {
 		const getId = e.currentTarget.attributes.id.value;
@@ -49,7 +46,7 @@ function Tv() {
 				movieIdDetail={movieId}
 				title={movie.name}
 				score={movie.vote_average}
-				url={IMG_URL_POSTER + movie.poster_path}
+				url={'https://image.tmdb.org/t/p/w500' + movie.poster_path}
 			/>
 		)
 	}

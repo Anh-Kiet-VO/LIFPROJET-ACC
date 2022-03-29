@@ -17,15 +17,9 @@ function Movie() {
 	const [page, setPage] = useState(1);
 
 	const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
+
 	const LANGUAGE = '&language=fr';
-
-	const BASE_URL = "https://api.themoviedb.org/3";
-	const API_URL = BASE_URL + '/discover/movie?' + API_KEY + `&sort_by=popularity.desc&page=${page}` + LANGUAGE;/*+ '&sort_by=popularity.desc&page=1'*/
-
-	const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
-
-	const SEARCH_URL = BASE_URL + '/search/movie?' + API_KEY;
-	//https://api.themoviedb.org/3/discover/movie?api_key=5ffad13612113d1554cbf7d1788c806c&language=fr
+	const API_URL = 'https://api.themoviedb.org/3/discover/movie?' + API_KEY + `&sort_by=popularity.desc&page=${page}` + LANGUAGE;/*+ '&sort_by=popularity.desc&page=1'*/
 
 	const getMovieInfo = (e) => {
 		const getId = e.currentTarget.attributes.id.value;
@@ -53,7 +47,7 @@ function Movie() {
 				movieIdDetail={movieId}
 				title={movie.title}
 				score={movie.vote_average}
-				url={IMG_URL_POSTER + movie.poster_path}
+				url={'https://image.tmdb.org/t/p/w500' + movie.poster_path}
 
 			/>
 		)

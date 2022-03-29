@@ -11,18 +11,11 @@ const Moviedetails = () => {
 	console.log(movieId.id);
 
 	const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
-	const BASE_URL = "https://api.themoviedb.org/3";
 
 	const LANGUAGE = '&language=fr';
 
-	const API_URL_DETAILS = BASE_URL + '/movie/' + movieId.id + '?' + API_KEY + LANGUAGE;
-	const API_URL_CREDITS = BASE_URL + '/movie/' + movieId.id + '/credits?' + API_KEY + LANGUAGE;
-
-	const IMG_URL = 'https://image.tmdb.org/t/p/w200';
-	const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
-
-	const SEARCH_URL = BASE_URL + '/search/movie?' + API_KEY;
-	//https://api.themoviedb.org/3/discover/movie?api_key=5ffad13612113d1554cbf7d1788c806c
+	const API_URL_DETAILS = 'https://api.themoviedb.org/3/movie/' + movieId.id + '?' + API_KEY + LANGUAGE;
+	const API_URL_CREDITS = 'https://api.themoviedb.org/3/movie/' + movieId.id + '/credits?' + API_KEY + LANGUAGE;
 
 	const [data, setData] = useState([]);
 
