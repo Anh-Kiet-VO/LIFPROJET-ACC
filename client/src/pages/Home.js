@@ -9,10 +9,10 @@ import Login from '../components/login'
 import "../style/home.css";
 
 function Home() {
-	const [emailReg, setEmailReg] = useState('');
+	const [usernameReg, setUsernameReg] = useState('');
 	const [passwordReg, setPasswordReg] = useState('');
 
-	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
 	const [loginStatus, setLoginStatus] = useState(false);
@@ -27,7 +27,7 @@ function Home() {
 
 	const register = () => {
 		Axios.post('http://localhost:3001/register', {
-			email: emailReg,
+			username: usernameReg,
 			password: passwordReg,
 		}).then((response) => {
 			console.log(response)
@@ -36,7 +36,7 @@ function Home() {
 
 	const login = () => {
 		Axios.post('http://localhost:3001/login', {
-			email: email,
+			username: username,
 			password: password,
 		}).then((response) => {
 			if (!response.data.auth) {
@@ -58,21 +58,40 @@ function Home() {
 			console.log(response);
 		})
 	}
+
+	const logout = () => {
+		localStorage.removeItem("token");
+		window.location.reload(false)
+	}
+
+	useEffect(() => {
+
+	}, [])
+
 	return (
 		<div className="home">
-			<Register
-				setEmailReg={setEmailReg}
-				setPasswordReg={setPasswordReg}
-				register={register}
-			/>
+			{
+				localStorage.getItem("token") == null ? (
+					<>
+						<Register
+							setUsernameReg={setUsernameReg}
+							setPasswordReg={setPasswordReg}
+							register={register}
+						/>
 
-			<Login
-				setEmail={setEmail}
-				setPassword={setPassword}
-				login={login}
-				loginStatus={loginStatus}
-				userAuthenticated={userAuthenticated}
-			/>
+						<Login
+							setUsername={setUsername}
+							setPassword={setPassword}
+							login={login}
+							loginStatus={loginStatus}
+							userAuthenticated={userAuthenticated}
+						/>
+					</>
+				) : (
+					<button onClick={logout}>Logout</button>
+				)
+			}
+
 		</div>
 	);
 }
