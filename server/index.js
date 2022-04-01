@@ -60,14 +60,6 @@ app.post('/register', (req, res) => {
 	})
 });
 
-app.get("/login", (req, res) => {
-	if (req.session.user) {
-		res.send({ loggedIn: true, user: req.session.user })
-	} else {
-		res.send({ loggedIn: false })
-	}
-})
-
 const verifiyJWT = (req, res, next) => {
 	const token = req.headers["x-access-token"]
 
@@ -89,31 +81,15 @@ app.get("/isUserAuth", verifiyJWT, (req, res) => {
 	res.send("Bien connecté")
 })
 
-app.get("/", (req, res) => {
-	res.send('AAAAA');
+app.get("/login", (req, res) => {
+	if (req.session.users) {
+		console.log("existe")
+		res.send({ loggedIn: true, users: req.session.users })
+	} else {
+		res.send({ loggedIn: false })
+		console.log("pas de user")
+	}
 })
-
-/*
-app.post('/login', (req, res) => {
-	const username = req.body.username;
-	const password = req.body.password;
-
-	db.query(
-		"SELECT * FROM user WHERE username = ?;",
-		username,
-		(err, result) => {
-			if(err) {
-				res.send( { err: err })
-			}
-			if(result.length > 0) {
-					res.send(result);
-				} else {
-					res.send( { message : "Wrong username/password combination!" });
-				}
-		}
-	);	
-});*/
-
 
 app.post('/login', (req, res) => {
 	const username = req.body.username;
@@ -131,9 +107,10 @@ app.post('/login', (req, res) => {
 					if (response) {
 						const id = result[0].id;
 						const token = jwt.sign({ id }, "jwtSecret", {
-							expiresIn: 300,
+							expiresIn: "1h",
 						})
 						req.session.users = result;
+						console.log(req.session.users)
 
 						res.json({ auth: true, token: token, result: result });
 					} else {

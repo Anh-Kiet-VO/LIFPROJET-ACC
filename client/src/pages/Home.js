@@ -40,7 +40,6 @@ function Home() {
 			password: password,
 		}).then((response) => {
 			if (!response.data.auth) {
-
 				setLoginStatus(false);
 			} else {
 				localStorage.setItem("token", response.data.token);
@@ -65,8 +64,13 @@ function Home() {
 	}
 
 	useEffect(() => {
-
-	}, [])
+		Axios.get("http://localhost:3000/login")
+			.then((response) => {
+				if (response.loggedIn == true) {
+					setUsername(response.data.user[0].username)
+				}
+			})
+	})
 
 	return (
 		<div className="home">
@@ -91,7 +95,7 @@ function Home() {
 					<button onClick={logout}>Logout</button>
 				)
 			}
-
+			{localStorage.getItem("token") == null ? null : "Bonjour " + username}
 		</div>
 	);
 }
