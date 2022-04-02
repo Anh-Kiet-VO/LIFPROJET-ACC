@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+
+import Axios from "axios"
 
 import CompSheet from '../components/CompSheet';
 import CompSheetMovieCredits from "../components/CompSheetMovieCredits";
@@ -7,8 +9,7 @@ import CompSheetMovieCredits from "../components/CompSheetMovieCredits";
 import '../App.css';
 
 const Moviedetails = () => {
-	let movieId = useParams();
-	console.log(movieId.id);
+	const movieId = useParams();
 
 	const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
 
@@ -21,8 +22,11 @@ const Moviedetails = () => {
 
 	const [credits, setCredits] = useState([]);
 
+	const [MOVIEID, setMovieId] = useState("")
+
 	useEffect(() => {
 		loadMovieData();
+		setMovieId(movieId.id)
 	}, [])
 
 	const loadMovieData = async () => {
@@ -30,7 +34,6 @@ const Moviedetails = () => {
 			.then(res => res.json())
 			.then(data => {
 				setData(data);
-				console.log(data)
 			});
 	}
 
@@ -65,6 +68,33 @@ const Moviedetails = () => {
 		)
 	}
 
+	const [movieStatus, setMovieStatus] = useState("")
+	const [movieProgress, setMovieProgress] = useState(0)
+	const [movieScore, setMovieScore] = useState(0)
+
+	const [username, setUsername] = useState("")
+
+	useEffect(() => {
+		Axios.get("http://localhost:3000/login")
+			.then((response) => {
+				console.log(response)
+				setUsername(response.data.users[0].username)
+				console.log("username = " + username);
+			})
+	})
+
+	const addMovie = () => {
+		Axios.post("http://localhost:3000/create", {
+			movieId: MOVIEID,
+			status: movieStatus,
+			score: movieScore,
+			progress: movieProgress,
+			userId: username
+		}).then(() => {
+			console.log("Info bien envoyé !")
+		})
+	};
+
 	return (
 		<div className="Sheet">
 			{
@@ -74,7 +104,39 @@ const Moviedetails = () => {
 				))*/
 				data ? createSheet(data) : null
 				// credits ? createSheetMovieCredits(credits) : null
+
 			}
+
+			<div className="crud-modal">
+				<h1>Status</h1>
+				<input
+					type="text"
+					placeholder="Cécilia"
+					onChange={(e) => {
+						setMovieStatus(e.target.value);
+					}}
+				/>
+
+				<h1>Progress</h1>
+				<input
+					type="number"
+					placeholder="Cécilia"
+					onChange={(e) => {
+						setMovieProgress(e.target.value);
+					}}
+				/>
+
+				<h1>Score</h1>
+				<input
+					type="number"
+					placeholder="Cécilia"
+					onChange={(e) => {
+						setMovieScore(e.target.value);
+					}}
+				/>
+				<button onClick={addMovie}>Save</button>
+				{console.log({ MOVIEID })}
+			</div>
 		</div>
 	);
 }
