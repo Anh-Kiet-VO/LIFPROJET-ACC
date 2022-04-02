@@ -124,6 +124,26 @@ app.post('/login', (req, res) => {
 	);
 });
 
+app.post('/create', (req, res) => {
+	const movieId = req.body.movieId;
+	const status = req.body.status;
+	const score = req.body.score;
+	const progress = req.body.progress;
+	const userId = req.body.userId;
+
+	db.query(
+		'INSERT INTO crud (movieId, status, score, progress, userId) VALUES (?,?,?,?,?)',
+		[movieId, status, score, progress, userId],
+		(err, result) => {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send("Valeur inséré")
+			}
+		}
+	);
+})
+
 
 app.listen(3001, () => {
 	console.log("Server running on port 3001");
