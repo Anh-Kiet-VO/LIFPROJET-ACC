@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Axios from "axios";
 import SearchTv from "../components/searchTv";
@@ -25,8 +25,25 @@ function Tv() {
 		setMovieId(getId);
 	}
 
+	const userAuthenticated = () => {
+		Axios.get("http://localhost:3001/isUserAuth", {
+			headers: {
+				"x-access-token": localStorage.getItem("token"),
+			},
+		}).then((response) => {
+			console.log(response);
+		})
+	}
+
+	let navigate = useNavigate();
+
 	useEffect(() => {
+		if (localStorage.getItem("token") == null) {
+			navigate("/");
+		}
+
 		loadMovieData();
+		userAuthenticated();
 	}, [])
 
 	const loadMovieData = async () => {
