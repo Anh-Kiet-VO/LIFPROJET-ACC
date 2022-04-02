@@ -13,7 +13,7 @@ import Navbar from "./components/Navbar";
 function App() {
 
 	return (
-		<div className="App">
+		<div className="main">
 			<BrowserRouter>
 				<Navbar />
 				<Routes>
