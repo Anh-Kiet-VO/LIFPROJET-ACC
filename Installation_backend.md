@@ -1,4 +1,6 @@
-## LIFPROJET-ACCInstallation base de donnée :
+# LIFPROJET-ACC
+
+## Installation base de donnée :
 Installer XAMPP
 Démarrer Apache et MySQL
 La base de donnée sera accessible via localhost/phpymadmin
@@ -14,6 +16,8 @@ table user avec id en clé primaire et en Auto Incremente
 ![User](https://cdn.discordapp.com/attachments/715537719287087117/959808366425829417/unknown.png)
 
 ## Démarrer notre API :
+```
 cd server
 npm install
 npm run start
+```
