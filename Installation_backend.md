@@ -5,7 +5,7 @@ La base de donnée sera accessible via localhost/phpymadmin
 ![Image XAMPP](https://cdn.discordapp.com/attachments/715537719287087117/959807860987011152/unknown.png)
 
 ## Une fois que c'est fait il faut créer la base de donnée :
-Nouvelle base de données
+Nouvelle base de données et le nommer "lifprojet"
 
 table crud avec movieId en clé primaire
 ![Crud](https://cdn.discordapp.com/attachments/715537719287087117/959807977731280896/unknown.png)
