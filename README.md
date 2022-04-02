@@ -64,6 +64,8 @@ npm install
 npm run start
 ```
 
+Pour la BDD :
+[voir tutoriel](https://github.com/Anh-Kiet-VO/LIFPROJET-ACC/blob/master/Installation_backend.md)
 -----------------
 
 ## 📚 Ressources :
