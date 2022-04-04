@@ -13,8 +13,11 @@ const Search = () => {
 	const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 	const LANGUAGE = '&language=fr';
 
+	const [page, setPage] = useState(1);
+
 	const BASE_URL = "https://api.themoviedb.org/3";
 	const SEARCH_URL = BASE_URL + '/search/movie?' + API_KEY + `&query=${search}` + LANGUAGE;
+	const API_URL = `https://api.themoviedb.org/3/discover/movie?` + API_KEY + `&sort_by=popularity.desc&page=1` + LANGUAGE;/*+ '&sort_by=popularity.desc&page=1'*/
 
 	const getMovieInfo = (e) => {
 		const getId = e.currentTarget.attributes.id.value;
@@ -26,11 +29,25 @@ const Search = () => {
 	}, [search])
 
 	const loadMovieData = async () => {
-		await fetch(SEARCH_URL)
+		/*await fetch(SEARCH_URL)
 			.then(res => res.json())
 			.then(data => {
 				setData(data);
-			});
+			});*/
+
+		Promise.all([
+			fetch(SEARCH_URL),
+			fetch(API_URL)
+		])
+		.then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+		/*.then(([data1, data2]) => this.setState({
+            searchMedia: data1,
+            popularMedia: data2
+        }));
+		.then(([data1, data2]) => {
+			setData(data1);
+			setData(data2);
+		});*/
 	}
 
 	const createCard = (movie) => {
@@ -69,6 +86,8 @@ const Search = () => {
 					data.results?.map(movie => (
 						createCard(movie)
 					))
+
+						//data.results ? data.results.map(movie => (createCard(movie))) : console.log("rien")
 				}
 			</div>
 		</div>

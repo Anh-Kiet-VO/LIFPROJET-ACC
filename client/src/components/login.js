@@ -9,7 +9,7 @@ export default function Login(props) {
 	};
 
 	return (
-		<div className="Login">
+		<div className="login">
 			<div className={isActive ? "hidden" : ""} id="register-modal">
 				<h1>Login</h1>
 				<input

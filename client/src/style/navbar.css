@@ -47,7 +47,6 @@
 	height: 100%;
 	display: flex;
 	align-items: center;
-	border-radius: 4px;
 	padding: 0 10px;
   }
   
@@ -58,6 +57,7 @@
   .nav-menu-items {
 	width: 100%;
 	padding: 0;
+	margin: 0;
   }
   
   .navbar-toggle {
