@@ -12,7 +12,7 @@ Nouvelle base de données et le nommer "lifprojet"
 table crud avec movieId en clé primaire
 ![Crud](https://cdn.discordapp.com/attachments/715537719287087117/959807977731280896/unknown.png)
 
-table user avec id en clé primaire et en Auto Incremente
+table users avec id en clé primaire et en Auto Incremente
 ![User](https://cdn.discordapp.com/attachments/715537719287087117/959808366425829417/unknown.png)
 
 ## Démarrer notre API :
