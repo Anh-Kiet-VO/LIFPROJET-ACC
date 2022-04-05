@@ -82,12 +82,12 @@ app.get("/isUserAuth", verifiyJWT, (req, res) => {
 })
 
 app.get("/login", (req, res) => {
-	if (req.session.users) {
-		console.log("existe")
-		res.send({ loggedIn: true, users: req.session.users })
+	if (req.session.user) {
+		console.log("existe");
+		res.send({ loggedIn: true, user: req.session.user })
 	} else {
 		res.send({ loggedIn: false })
-		console.log("pas de user")
+		console.log("user en loggedIn false : " + req.session.user);
 	}
 })
 
@@ -107,10 +107,10 @@ app.post('/login', (req, res) => {
 					if (response) {
 						const id = result[0].id;
 						const token = jwt.sign({ id }, "jwtSecret", {
-							expiresIn: "1h",
+							expiresIn: 300,
 						})
-						req.session.users = result;
-						console.log(req.session.users)
+						req.session.user = result;
+						console.log(req.session.user)
 
 						res.json({ auth: true, token: token, result: result });
 					} else {
@@ -132,7 +132,7 @@ app.post('/create', (req, res) => {
 	const userId = req.body.userId;
 
 	db.query(
-		'INSERT INTO crud (movieId, status, score, progress, userId) VALUES (?,?,?,?,?)',
+		'INSERT INTO watchlist (movieId, status, score, progress, userId) VALUES (?,?,?,?,?)',
 		[movieId, status, score, progress, userId],
 		(err, result) => {
 			if (err) {
@@ -145,13 +145,15 @@ app.post('/create', (req, res) => {
 })
 
 app.get('/showList', (req, res) => {
+	const username = req.headers["userID"];
 	db.query(
-		'SELECT * FROM crud',
+		"SELECT * FROM watchlist",
 		(err, result) => {
 			if (err) {
 				console.log(err);
 			} else {
 				res.send(result)
+				console.log(result)
 			}
 		}
 	);

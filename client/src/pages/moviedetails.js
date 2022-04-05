@@ -77,16 +77,16 @@ const Moviedetails = () => {
 	const [crudList, setCrudList] = useState([])
 
 	useEffect(() => {
-		Axios.get("http://localhost:3000/login")
+		Axios.get("http://localhost:3000/login") //1
 			.then((response) => {
-				console.log(response)
-				setUsername(response.data.users[0].username)
-				console.log("username = " + username);
+				// console.log(response.data.user[0].username);
+				setUsername(response.data.user[0].username);
+				//console.log(response)
 			})
 	})
 
 	const addMovie = () => {
-		Axios.post("http://localhost:3000/create", {
+		Axios.post("http://localhost:3001/create", {
 			movieId: MOVIEID,
 			status: movieStatus,
 			score: movieScore,
@@ -98,15 +98,17 @@ const Moviedetails = () => {
 	};
 
 	const showList = () => {
-		Axios.get("http://localhost:3000/showList")
-			.then((response) => {
-				const getId = response.data.filter(data => data.userId == username);
-				if (data.userId == username) {
-					setCrudList(response.data)
-				} else {
-					console.log("pas de data enregistre par cet utilisateur")
-				}
+		Axios.get("http://localhost:3001/showList").
+			then((response) => {
+				setCrudList(response.data)
+				//console.log(response.data[0])
+				console.log("caca")
+				console.log(crudList)
 			})
+	}
+
+	const filterList = () => {
+		console.log(typeof (crudList))
 	}
 
 	return (
@@ -154,7 +156,7 @@ const Moviedetails = () => {
 				<button onClick={showList}>show</button>
 				{
 					crudList.map((val, key) => {
-						return <div>{val.userId}</div>
+						return <div>{val.movieId + val.status + val.score + val.progress + val.userId}</div>
 					})
 				}
 			</div>
