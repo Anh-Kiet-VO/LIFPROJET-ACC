@@ -6,7 +6,6 @@ const Search = () => {
 	const [movieId, setMovieId] = useState('');
 
 	const [data1, setData1] = useState([]);
-
 	const [data2, setData2] = useState([]);
 
 	const [search, setSearch] = useState(".");
@@ -75,7 +74,7 @@ const Search = () => {
 
 			<div className="search-result">
 				{
-					data1.results ? data1.results.map(movie => (createCard(movie))) : data2.results.map(movie => (createCard(movie)))
+					//data1.results ? data1.results.map(movie => (createCard(movie))) : data2.results.map(movie => (createCard(movie)))
 				}
 			</div>
 		</div>
