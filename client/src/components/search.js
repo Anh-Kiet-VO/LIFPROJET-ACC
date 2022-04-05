@@ -5,7 +5,9 @@ const Search = () => {
 
 	const [movieId, setMovieId] = useState('');
 
-	const [data, setData] = useState([]);
+	const [data1, setData1] = useState([]);
+
+	const [data2, setData2] = useState([]);
 
 	const [search, setSearch] = useState(".");
 
@@ -29,25 +31,15 @@ const Search = () => {
 	}, [search])
 
 	const loadMovieData = async () => {
-		/*await fetch(SEARCH_URL)
-			.then(res => res.json())
-			.then(data => {
-				setData(data);
-			});*/
-
 		Promise.all([
 			fetch(SEARCH_URL),
 			fetch(API_URL)
 		])
 		.then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-		/*.then(([data1, data2]) => this.setState({
-            searchMedia: data1,
-            popularMedia: data2
-        }));
 		.then(([data1, data2]) => {
-			setData(data1);
-			setData(data2);
-		});*/
+			setData1(data1);
+			setData2(data2);
+		});
 	}
 
 	const createCard = (movie) => {
@@ -66,8 +58,8 @@ const Search = () => {
 	}
 
 	return (
-		<div className='search'>
-			<div className='search-bar'>
+		<div className="search">
+			<div className="search-bar">
 				<form>
 					<input
 						type="text"
@@ -81,13 +73,9 @@ const Search = () => {
 				</form>
 			</div>
 
-			<div className='search-result'>
+			<div className="search-result">
 				{
-					data.results?.map(movie => (
-						createCard(movie)
-					))
-
-						//data.results ? data.results.map(movie => (createCard(movie))) : console.log("rien")
+					data1.results ? data1.results.map(movie => (createCard(movie))) : data2.results.map(movie => (createCard(movie)))
 				}
 			</div>
 		</div>

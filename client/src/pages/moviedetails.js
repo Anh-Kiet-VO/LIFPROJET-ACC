@@ -100,8 +100,8 @@ const Moviedetails = () => {
 	const showList = () => {
 		Axios.get("http://localhost:3000/showList")
 			.then((response) => {
-				const getId = response.data.filter(data => data.userId == username);
-				if (data.userId == username) {
+				const getId = response.data.filter(data => data.userId === username);
+				if (data.userId === username) {
 					setCrudList(response.data)
 				} else {
 					console.log("pas de data enregistre par cet utilisateur")
