@@ -83,7 +83,7 @@ const Moviedetails = () => {
 				setUsername(response.data.user[0].username);
 				//console.log(response)
 			})
-	})
+	}, [])
 
 	const addMovie = () => {
 		Axios.post("http://localhost:3001/create", {
@@ -97,19 +97,37 @@ const Moviedetails = () => {
 		})
 	};
 
+	const deleteMovie = (movieId, status, score, progress) => {
+		Axios.delete("http://localhost:3001/delete", {
+			movieId: movieId,
+			status: status,
+			score: score,
+			progress: progress
+		})
+	}
+
+	const [filteredList, setFilteredList] = useState([])
+
+	const filterList = () => {
+		crudList.filter(user => user.userId == username)
+			.map(val => {
+				setFilteredList(val);
+			})
+	}
+
 	const showList = () => {
 		Axios.get("http://localhost:3001/showList").
 			then((response) => {
 				setCrudList(response.data)
 				//console.log(response.data[0])
-				console.log("caca")
-				console.log(crudList)
+				filterList()
 			})
+		console.log("corgiiiiiiiiiiiiiiiiii")
+		console.log(filteredList)
 	}
 
-	const filterList = () => {
-		console.log(typeof (crudList))
-	}
+
+
 
 	return (
 		<div className="Sheet">
@@ -155,9 +173,27 @@ const Moviedetails = () => {
 
 				<button onClick={showList}>show</button>
 				{
-					crudList.map((val, key) => {
-						return <div>{val.movieId + val.status + val.score + val.progress + val.userId}</div>
-					})
+					// crudList.map((val, key) => {
+					// 	return <div>{console.log(val) + val.movieId + val.status + val.score + val.progress + val.userId}</div>
+					// })
+
+					// console.log(crudList.filter(user => user.userId == username).map(val => val.movieId))
+
+					crudList.filter(user => user.userId == username)
+						.map((val, key) => {
+							return (
+								<div key={key} className="crud-list">
+									<h1>{val.movieId}</h1>
+									<h1>{val.status}</h1>
+									<h1>{val.score}</h1>
+									<h1>{val.progress}</h1>
+									<h1>{val.userId}</h1>
+									<button onClick={() => { deleteMovie(val.movieId, val.status, val.score, val.progress, val.userId) }}>Delete</button>
+									<input type="text" id="updateInput" />
+									<button>Update</button>
+								</div>
+							)
+						})
 				}
 			</div>
 		</div>

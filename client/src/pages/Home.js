@@ -35,7 +35,7 @@ function Home() {
 	};
 
 	const login = () => {
-		Axios.post('http://localhost:3000/login', { //1
+		Axios.post('http://localhost:3000/login', {
 			username: username,
 			password: password,
 		}).then((response) => {
@@ -64,7 +64,7 @@ function Home() {
 	}
 
 	useEffect(() => {
-		Axios.get("http://localhost:3001/login")
+		Axios.get("http://localhost:3000/login")
 			.then((response) => {
 				if (response.loggedIn == true) {
 					setUsername(response.data.user[0].username)

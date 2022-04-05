@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
 	origin: ["http://localhost:3000"],
-	methods: ["GET", "POST"],
+	methods: ["GET", "POST", "DELETE"],
 	credentials: true
 }));
 app.use(cookieParser());
@@ -31,6 +31,7 @@ app.use(session({
 	saveUninitialized: false,
 	cookie: {
 		expires: 60 * 60 * 24,
+		httpOnly: false
 	},
 })
 );
@@ -142,6 +143,40 @@ app.post('/create', (req, res) => {
 			}
 		}
 	);
+})
+
+// app.delete('/delete', (req, res) => {
+// 	const movieId = req.body.movieId;
+// 	const status = req.body.status;
+// 	const score = req.body.score;
+// 	const progress = req.body.progress;
+// 	const userId = req.body.userId;
+// 	db.query(
+// 		'DELETE FROM watchlist WHERE movieId = ? AND status = ? AND score = ? AND progress = ? AND userId = ?',
+// 		[movieId, status, score, progress, userId],
+// 		(err, result) => {
+// 			if (err) {
+// 				console.log(err);
+// 			} else {
+// 				res.send("Valeur supprimé");
+// 			}
+// 		}
+// 	)
+// })
+
+app.delete('/delete', (req, res) => {
+	const movieId = req.body.movieId;
+
+	db.query(
+		'DELETE FROM watchlist WHERE movieId = ?', [movieId],
+		(err, result) => {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send("Valeur supprimé");
+			}
+		}
+	)
 })
 
 app.get('/showList', (req, res) => {
