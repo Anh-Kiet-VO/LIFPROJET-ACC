@@ -144,6 +144,19 @@ app.post('/create', (req, res) => {
 	);
 })
 
+app.get('/showList', (req, res) => {
+	db.query(
+		'SELECT * FROM crud',
+		(err, result) => {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send(result)
+			}
+		}
+	);
+})
+
 
 app.listen(3001, () => {
 	console.log("Server running on port 3001");

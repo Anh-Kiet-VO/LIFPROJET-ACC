@@ -74,6 +74,8 @@ const Moviedetails = () => {
 
 	const [username, setUsername] = useState("")
 
+	const [crudList, setCrudList] = useState([])
+
 	useEffect(() => {
 		Axios.get("http://localhost:3000/login")
 			.then((response) => {
@@ -94,6 +96,18 @@ const Moviedetails = () => {
 			console.log("Info bien envoyé !")
 		})
 	};
+
+	const showList = () => {
+		Axios.get("http://localhost:3000/showList")
+			.then((response) => {
+				const getId = response.data.filter(data => data.userId == username);
+				if (data.userId == username) {
+					setCrudList(response.data)
+				} else {
+					console.log("pas de data enregistre par cet utilisateur")
+				}
+			})
+	}
 
 	return (
 		<div className="Sheet">
@@ -136,6 +150,13 @@ const Moviedetails = () => {
 				/>
 				<button onClick={addMovie}>Save</button>
 				{console.log({ MOVIEID })}
+
+				<button onClick={showList}>show</button>
+				{
+					crudList.map((val, key) => {
+						return <div>{val.userId}</div>
+					})
+				}
 			</div>
 		</div>
 	);
