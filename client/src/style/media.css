@@ -1,0 +1,31 @@
+.media-display {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.search {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.search input {
+    margin: 0 20px;
+}
+
+.search-result {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.movie-link {
+    max-width: 15%;
+}
+
+.movie-link img {
+    width: 100%;
+}

@@ -6,10 +6,6 @@
   align-content: center;
 }
 
-.movie img {
-  width: 200px;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;

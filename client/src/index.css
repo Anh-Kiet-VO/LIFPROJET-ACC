@@ -3,18 +3,18 @@
 :root {
   --color-dark: #161616;
   --color-accent: #557adf;
+  --color-light: #fff;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Manrope', sans-serif;
+  font-family: -apple-system, 'Manrope', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Consolas, 'Courier New', monospace;
 }
 
 .main {

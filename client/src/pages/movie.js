@@ -5,6 +5,7 @@ import Axios from "axios";
 import Search from "../components/search";
 
 import "../App.css";
+import "../style/media.css"
 
 import CardMovie from '../components/cardMovie';
 
@@ -39,12 +40,12 @@ function Movie() {
 	let navigate = useNavigate();
 
 	useEffect(() => {
-		if (localStorage.getItem("token") == null) {
+		/*if (localStorage.getItem("token") == null) {
 			navigate("/");
-		}
+		}*/
 
 		loadMovieData();
-		userAuthenticated();
+		/*userAuthenticated();*/
 	}, [])
 
 	const loadMovieData = async () => {
@@ -71,13 +72,13 @@ function Movie() {
 	}
 
 	return (
-		<div className="App">
+		<div className="media-display">
 			<Search />
 
 			{
-				data.results?.map(movie => (
+				/*data.results?.map(movie => (
 					createCard(movie)
-				))
+				))*/
 			}
 
 		</div>
