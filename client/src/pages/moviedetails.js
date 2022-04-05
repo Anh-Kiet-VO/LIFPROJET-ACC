@@ -98,32 +98,14 @@ const Moviedetails = () => {
 	};
 
 	const deleteMovie = (movieId, status, score, progress) => {
-		Axios.delete("http://localhost:3001/delete", {
-			movieId: movieId,
-			status: status,
-			score: score,
-			progress: progress
-		})
-	}
-
-	const [filteredList, setFilteredList] = useState([])
-
-	const filterList = () => {
-		crudList.filter(user => user.userId == username)
-			.map(val => {
-				setFilteredList(val);
-			})
+		Axios.delete(`http://localhost:3001/delete/${movieId}`)
 	}
 
 	const showList = () => {
 		Axios.get("http://localhost:3001/showList").
 			then((response) => {
 				setCrudList(response.data)
-				//console.log(response.data[0])
-				filterList()
 			})
-		console.log("corgiiiiiiiiiiiiiiiiii")
-		console.log(filteredList)
 	}
 
 

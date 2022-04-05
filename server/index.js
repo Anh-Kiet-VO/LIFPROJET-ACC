@@ -164,13 +164,14 @@ app.post('/create', (req, res) => {
 // 	)
 // })
 
-app.delete('/delete', (req, res) => {
-	const movieId = req.body.movieId;
+app.delete('/delete/:movieId', (req, res) => {
+	const movieId = req.params.movieId;
 
 	db.query(
 		'DELETE FROM watchlist WHERE movieId = ?', [movieId],
 		(err, result) => {
 			if (err) {
+				console.log("Film non supprimé");
 				console.log(err);
 			} else {
 				res.send("Valeur supprimé");
