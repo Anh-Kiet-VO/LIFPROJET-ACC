@@ -9,6 +9,7 @@ import Movie from "./pages/movie";
 import Tv from "./pages/Tv";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
+import Profile from "./pages/profile"
 
 function App() {
 
@@ -17,12 +18,12 @@ function App() {
 			<BrowserRouter>
 				<Navbar />
 				<Routes>
-
 					<Route path="/detailMovie/:id" element={<Moviedetails />}></Route>
 					<Route path="/detailTv/:id" element={<Tvdetails />}></Route>
 					<Route path="/" element={<Home />}></Route>
 					<Route path="/movie" element={<Movie />}></Route>
 					<Route path="/tv" element={<Tv />}></Route>
+					<Route path="/profile/:id" element={<Profile />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
