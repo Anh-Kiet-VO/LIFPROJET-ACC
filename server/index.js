@@ -127,19 +127,51 @@ app.post('/login', (req, res) => {
 
 app.post('/create', (req, res) => {
 	const movieId = req.body.movieId;
+	const title = req.body.title;
 	const status = req.body.status;
 	const score = req.body.score;
 	const progress = req.body.progress;
 	const userId = req.body.userId;
 
 	db.query(
-		'INSERT INTO watchlist (movieId, status, score, progress, userId) VALUES (?,?,?,?,?)',
-		[movieId, status, score, progress, userId],
+		'INSERT INTO watchlist (movieId, title, status, score, progress, userId) VALUES (?,?,?,?,?,?)',
+		[movieId, title, status, score, progress, userId],
 		(err, result) => {
 			if (err) {
 				console.log(err);
 			} else {
 				res.send("Valeur inséré")
+			}
+		}
+	);
+})
+
+app.get('/basicInfo/:id', (req, res) => {
+	const id = req.params.id;
+	db.query(
+		'SELECT * FROM users WHERE id = ?',
+		id,
+		(err, result) => {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send(result);
+			}
+		}
+	);
+})
+
+app.get('/movieList/:username', (req, res) => {
+	const username = req.params.username;
+	db.query(
+		'SELECT * FROM watchlist WHERE userId = ?',
+		username,
+		(err, result) => {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send(result);
+				console.log(result);
 			}
 		}
 	);
@@ -180,8 +212,24 @@ app.delete('/delete/:movieId', (req, res) => {
 	)
 })
 
+app.put('/update', (req, res) => {
+	const score = req.body.score;
+	const movieId = req.body.movieId
+
+	db.query(
+		'UPDATE SET watchlist score = ? WHERE movieId = ?', [score, movieId],
+		(err, result) => {
+			if (err) {
+				console.log("Information non changé");
+				console.log(err);
+			} else {
+				res.send("Valeur modifié");
+			}
+		}
+	)
+})
+
 app.get('/showList', (req, res) => {
-	const username = req.headers["userID"];
 	db.query(
 		"SELECT * FROM watchlist",
 		(err, result) => {

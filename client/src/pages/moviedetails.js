@@ -24,6 +24,8 @@ const Moviedetails = () => {
 
 	const [MOVIEID, setMovieId] = useState("")
 
+	const [title, setTitle] = useState("")
+
 	useEffect(() => {
 		loadMovieData();
 		setMovieId(movieId.id)
@@ -34,6 +36,8 @@ const Moviedetails = () => {
 			.then(res => res.json())
 			.then(data => {
 				setData(data);
+				setTitle(data.title);
+				console.log(title);
 			});
 	}
 
@@ -44,6 +48,8 @@ const Moviedetails = () => {
 				setCredits(credits);
 			});
 	}
+
+
 
 	const createSheet = (media) => {
 		return (
@@ -88,6 +94,7 @@ const Moviedetails = () => {
 	const addMovie = () => {
 		Axios.post("http://localhost:3001/create", {
 			movieId: MOVIEID,
+			title: title,
 			status: movieStatus,
 			score: movieScore,
 			progress: movieProgress,
@@ -99,7 +106,14 @@ const Moviedetails = () => {
 
 	const deleteMovie = (movieId, status, score, progress) => {
 		Axios.delete(`http://localhost:3001/delete/${movieId}`)
+		// console.log("id = " + movieId);
+		// setCrudList(crudList.filter(movie => movie.movieId != movieId));
+		// console.log(crudList);
 	}
+
+	useEffect(() => {
+
+	}, [deleteMovie])
 
 	const showList = () => {
 		Axios.get("http://localhost:3001/showList").
@@ -108,8 +122,12 @@ const Moviedetails = () => {
 			})
 	}
 
+	const updateMovie = (movieId,) => {
+		Axios.put("http://localhost:3001/update", {
+			movieId: movieId,
 
-
+		});
+	}
 
 	return (
 		<div className="Sheet">
@@ -142,6 +160,12 @@ const Moviedetails = () => {
 					}}
 				/>
 
+
+				<input
+					type="text"
+					placeholder="cece"
+				/>
+
 				<h1>Score</h1>
 				<input
 					type="number"
@@ -151,7 +175,6 @@ const Moviedetails = () => {
 					}}
 				/>
 				<button onClick={addMovie}>Save</button>
-				{console.log({ MOVIEID })}
 
 				<button onClick={showList}>show</button>
 				{
@@ -166,6 +189,7 @@ const Moviedetails = () => {
 							return (
 								<div key={key} className="crud-list">
 									<h1>{val.movieId}</h1>
+									<h1>{val.title}</h1>
 									<h1>{val.status}</h1>
 									<h1>{val.score}</h1>
 									<h1>{val.progress}</h1>
