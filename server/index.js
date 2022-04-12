@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
 	origin: ["http://localhost:3000"],
-	methods: ["GET", "POST", "DELETE"],
+	methods: ["GET", "POST", "DELETE", "PUT"],
 	credentials: true
 }));
 app.use(cookieParser());
@@ -171,7 +171,6 @@ app.get('/movieList/:username', (req, res) => {
 				console.log(err);
 			} else {
 				res.send(result);
-				console.log(result);
 			}
 		}
 	);
@@ -198,7 +197,6 @@ app.get('/movieList/:username', (req, res) => {
 
 app.delete('/delete/:movieId', (req, res) => {
 	const movieId = req.params.movieId;
-
 	db.query(
 		'DELETE FROM watchlist WHERE movieId = ?', [movieId],
 		(err, result) => {
@@ -213,17 +211,22 @@ app.delete('/delete/:movieId', (req, res) => {
 })
 
 app.put('/update', (req, res) => {
+	const movieId = req.params.movieId;
+	const status = req.body.status;
 	const score = req.body.score;
-	const movieId = req.body.movieId
+	const progress = req.body.progress;
+
+
 
 	db.query(
-		'UPDATE SET watchlist score = ? WHERE movieId = ?', [score, movieId],
+		'UPDATE watchlist SET score = ?, status = ?, progress = ? WHERE movieId = ?', [score, status, progress, movieId],
 		(err, result) => {
 			if (err) {
 				console.log("Information non changé");
 				console.log(err);
 			} else {
 				res.send("Valeur modifié");
+				console.log(result)
 			}
 		}
 	)
@@ -237,7 +240,6 @@ app.get('/showList', (req, res) => {
 				console.log(err);
 			} else {
 				res.send(result)
-				console.log(result)
 			}
 		}
 	);
