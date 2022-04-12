@@ -22,11 +22,5 @@ export const SidebarData = [
 		path: '/TV',
 		icon: <RiIcons.RiMovie2Line />,
 		cName: 'nav-text'
-	},
-	{
-		title: 'Logout',
-		path: '/',
-		icon: <CgIcons.CgLogOut />,
-		cName: 'nav-text'
 	}
 ]

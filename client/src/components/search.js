@@ -75,8 +75,11 @@ const Search = () => {
 
 			<div className="search-result">
 				{
-					//data1.results ? data1.results.map(movie => (createCard(movie))) : data2.results.map(movie => (createCard(movie)))
-					data2.results?.map(movie => (createCard(movie)))
+					data1.results ? data1.results?.map(movie => (createCard(movie))) : data2.results?.map(movie => (createCard(movie)))
+
+					//data1.results ? data1.results?.map(movie => (createCard(movie))) : console.log(data2.results)
+
+					//data2.results?.map(movie => (createCard(movie)))
 				}
 			</div>
 		</div>

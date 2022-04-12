@@ -3,7 +3,7 @@ import React from 'react'
 export default function crudListProps(props) {
 	return (
 		<div className="crud-modal">
-			<h1>Status</h1>
+			<h1>Statut</h1>
 			<input
 				type="text"
 				placeholder="Cécilia"
@@ -12,7 +12,7 @@ export default function crudListProps(props) {
 				}}
 			/>
 
-			<h1>Progress</h1>
+			<h1>Progression</h1>
 			<input
 				type="number"
 				placeholder="Cécilia"
@@ -21,7 +21,7 @@ export default function crudListProps(props) {
 				}}
 			/>
 
-			<h1>Score</h1>
+			<h1>Note</h1>
 			<input
 				type="number"
 				placeholder="Cécilia"
