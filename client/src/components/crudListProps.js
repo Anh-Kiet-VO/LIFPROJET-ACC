@@ -72,7 +72,7 @@ export default function crudListProps(props) {
 										props.setnewMovieScore(e.target.value);
 									}}
 								/>
-								<button onClick={props.updateMovie(val.movieId)}>Editer</button>
+								<button onClick={() => { props.updateMovie(val.movieId) }}>Editer</button>
 							</div>
 						)
 					})
