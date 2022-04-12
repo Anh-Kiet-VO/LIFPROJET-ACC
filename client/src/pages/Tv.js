@@ -38,12 +38,12 @@ function Tv() {
 	let navigate = useNavigate();
 
 	useEffect(() => {
-		if (localStorage.getItem("token") == null) {
+		/*if (localStorage.getItem("token") == null) {
 			navigate("/");
-		}
+		}*/
 
 		loadMovieData();
-		userAuthenticated();
+		/*userAuthenticated();*/
 	}, [])
 
 	const loadMovieData = async () => {
@@ -69,14 +69,8 @@ function Tv() {
 	}
 
 	return (
-		<div className="App">
+		<div className="media-display">
 			<SearchTv />
-
-			{
-				data.results?.map(movie => (
-					createCard(movie)
-				))
-			}
 
 		</div>
 
