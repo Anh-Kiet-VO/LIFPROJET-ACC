@@ -3,26 +3,34 @@ import { useParams } from "react-router-dom";
 
 import CompSheetTv from '../components/CompSheetTv';
 import CompSheetTvCredits from "../components/CompSheetTvCredits";
+import Axios from "axios"
+import CrudListProps from '../components/crudListProps';
+
 
 import '../App.css';
 
 const TVdetails = () => {
-    let tvId = useParams();
-    console.log(tvId.id);
+    let movieId = useParams();
+
 
     const API_KEY = "api_key=5ffad13612113d1554cbf7d1788c806c";
 
     const LANGUAGE = '&language=fr';
 
-    const API_URL_DETAILS = 'https://api.themoviedb.org/3/tv/' + tvId.id + '?' + API_KEY + LANGUAGE;
-    const API_URL_CREDITS = 'https://api.themoviedb.org/3/tv/' + tvId.id + '/credits?' + API_KEY + LANGUAGE;
+    const API_URL_DETAILS = 'https://api.themoviedb.org/3/tv/' + movieId.id + '?' + API_KEY + LANGUAGE;
+    const API_URL_CREDITS = 'https://api.themoviedb.org/3/tv/' + movieId.id + '/credits?' + API_KEY + LANGUAGE;
 
     const [data, setData] = useState([]);
 
     const [credits, setCredits] = useState([]);
 
+    const [MOVIEID, setMovieId] = useState("")
+
+    const [title, setTitle] = useState("")
+
     useEffect(() => {
         loadTvData();
+        setMovieId(movieId.id)
     }, [])
 
     const loadTvData = async () => {
@@ -30,7 +38,7 @@ const TVdetails = () => {
             .then(res => res.json())
             .then(data => {
                 setData(data);
-                console.log(data)
+                setTitle(data.name);
             });
     }
 
@@ -41,6 +49,8 @@ const TVdetails = () => {
                 setCredits(credits);
             });
     }
+
+
 
     const createSheet = (media) => {
         return (
@@ -65,6 +75,66 @@ const TVdetails = () => {
         )
     }
 
+    const [movieStatus, setMovieStatus] = useState("")
+    const [movieProgress, setMovieProgress] = useState(0)
+    const [movieScore, setMovieScore] = useState(0)
+
+    const [username, setUsername] = useState("")
+
+    const [crudList, setCrudList] = useState([])
+
+    useEffect(() => {
+        Axios.get("http://localhost:3000/login") //1
+            .then((response) => {
+                // console.log(response.data.user[0].username);
+                setUsername(response.data.user[0].username);
+                //console.log(response)
+            })
+    }, [])
+
+    const addMovie = () => {
+        Axios.post("http://localhost:3001/create", {
+            movieId: MOVIEID,
+            title: title,
+            status: movieStatus,
+            score: movieScore,
+            progress: movieProgress,
+            userId: username
+        }).then(() => {
+            console.log("Info bien envoyé !")
+        })
+    };
+
+    const deleteMovie = (movieId) => {
+        Axios.delete(`http://localhost:3001/delete/${movieId}`).then(() => {
+            console.log("Film bien supprimé !")
+        })
+    }
+
+    const showList = () => {
+        Axios.get("http://localhost:3001/showList").
+            then((response) => {
+                setCrudList(response.data)
+            })
+    }
+
+    const [newmovieStatus, setnewMovieStatus] = useState("")
+    const [newmovieProgress, setnewMovieProgress] = useState(0)
+    const [newmovieScore, setnewMovieScore] = useState(0)
+
+    const updateMovie = (movieId, userId) => {
+        Axios.put("http://localhost:3001/update", {
+            movieId: movieId,
+            status: newmovieStatus,
+            score: newmovieScore,
+            progress: newmovieProgress,
+            userId: userId
+        }).then(() => {
+            console.log("Film bien modifié !")
+        });
+    }
+
+
     return (
         <div className="Sheet">
             {
@@ -75,6 +145,21 @@ const TVdetails = () => {
                 data ? createSheet(data) : null
                 // credits ? createTvCredits(credits) : null
             }
+
+            <CrudListProps
+                setMovieStatus={setMovieStatus}
+                setMovieProgress={setMovieProgress}
+                setMovieScore={setMovieScore}
+                addMovie={addMovie}
+                showList={showList}
+                crudList={crudList}
+                username={username}
+                deleteMovie={deleteMovie}
+                setnewMovieStatus={setnewMovieStatus}
+                setnewMovieProgress={setnewMovieProgress}
+                setnewMovieScore={setnewMovieScore}
+                updateMovie={updateMovie}
+            />
         </div>
     );
 }
