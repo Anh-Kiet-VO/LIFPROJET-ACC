@@ -51,7 +51,7 @@ export default function crudListProps(props) {
 									type="text"
 									placeholder="Completed..."
 									onChange={(e) => {
-										props.setnewMovieProgress(e.target.value);
+										props.setnewMovieStatus(e.target.value);
 									}}
 								/>
 

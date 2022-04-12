@@ -211,7 +211,8 @@ app.delete('/delete/:movieId', (req, res) => {
 })
 
 app.put('/update', (req, res) => {
-	const movieId = req.params.movieId;
+	const movieId = req.body.movieId;
+	console.log(movieId)
 	const status = req.body.status;
 	const score = req.body.score;
 	const progress = req.body.progress;
