@@ -4,12 +4,12 @@ import Axios from "axios";
 import "./App.css";
 
 import Moviedetails from "./pages/moviedetails";
-import Tvdetails from "./pages/tvdetails"
+import Tvdetails from "./pages/tvdetails";
 import Movie from "./pages/movie";
 import Tv from "./pages/Tv";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
-import Profile from "./pages/profile"
+import Profile from "./pages/profile";
 
 function App() {
 

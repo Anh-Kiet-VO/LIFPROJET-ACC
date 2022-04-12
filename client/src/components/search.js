@@ -43,18 +43,32 @@ const Search = () => {
 	}
 
 	const createCard = (movie) => {
-		return (
-			<CardMovie
-				id={movie.id}
-				key={movie.id}
-				getMovieInfo={getMovieInfo}
-				movieIdDetail={movieId}
-				title={movie.title}
-				score={movie.vote_average}
-				url={IMG_URL_POSTER + movie.poster_path}
-
-			/>
-		)
+		if(movie.poster_path == null) {
+			return (
+				<CardMovie
+					id={movie.id}
+					key={movie.id}
+					getMovieInfo={getMovieInfo}
+					movieIdDetail={movieId}
+					title={movie.title}
+					score={movie.vote_average}
+					url={'/no_image.png'}
+	
+				/>
+			)
+		} else {
+			return (
+				<CardMovie
+					id={movie.id}
+					key={movie.id}
+					getMovieInfo={getMovieInfo}
+					movieIdDetail={movieId}
+					title={movie.title}
+					score={movie.vote_average}
+					url={IMG_URL_POSTER + movie.poster_path}
+				/>
+			)
+		}
 	}
 
 	return (

@@ -56,21 +56,6 @@ function Movie() {
 			});
 	}
 
-	const createCard = (movie) => {
-		return (
-			<CardMovie
-				id={movie.id}
-				key={movie.id}
-				getMovieInfo={getMovieInfo}
-				movieIdDetail={movieId}
-				title={movie.title}
-				score={movie.vote_average}
-				url={'https://image.tmdb.org/t/p/w500' + movie.poster_path}
-
-			/>
-		)
-	}
-
 	return (
 		<div className="media-display">
 			<Search />

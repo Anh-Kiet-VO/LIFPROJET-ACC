@@ -1,4 +1,5 @@
 .media-display {
+    width: 100%;
     text-align: center;
     display: flex;
     flex-wrap: wrap;
