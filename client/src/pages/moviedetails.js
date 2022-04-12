@@ -5,6 +5,7 @@ import Axios from "axios"
 
 import CompSheet from '../components/CompSheet';
 import CompSheetMovieCredits from "../components/CompSheetMovieCredits";
+import CrudListProps from '../components/crudListProps';
 
 import '../App.css';
 
@@ -37,7 +38,6 @@ const Moviedetails = () => {
 			.then(data => {
 				setData(data);
 				setTitle(data.title);
-				console.log(title);
 			});
 	}
 
@@ -48,8 +48,6 @@ const Moviedetails = () => {
 				setCredits(credits);
 			});
 	}
-
-
 
 	const createSheet = (media) => {
 		return (
@@ -104,16 +102,11 @@ const Moviedetails = () => {
 		})
 	};
 
-	const deleteMovie = (movieId, status, score, progress) => {
-		Axios.delete(`http://localhost:3001/delete/${movieId}`)
-		// console.log("id = " + movieId);
-		// setCrudList(crudList.filter(movie => movie.movieId != movieId));
-		// console.log(crudList);
+	const deleteMovie = (movieId) => {
+		Axios.delete(`http://localhost:3001/delete/${movieId}`).then(() => {
+			console.log("Film bien supprimé !")
+		})
 	}
-
-	useEffect(() => {
-
-	}, [deleteMovie])
 
 	const showList = () => {
 		Axios.get("http://localhost:3001/showList").
@@ -122,86 +115,44 @@ const Moviedetails = () => {
 			})
 	}
 
-	const updateMovie = (movieId,) => {
+	const [newmovieStatus, setnewMovieStatus] = useState("")
+	const [newmovieProgress, setnewMovieProgress] = useState(0)
+	const [newmovieScore, setnewMovieScore] = useState(0)
+
+	const updateMovie = (movieId, userId) => {
 		Axios.put("http://localhost:3001/update", {
 			movieId: movieId,
-
+			status: newmovieStatus,
+			score: newmovieScore,
+			progress: newmovieProgress,
+			userId: userId
+		}).then(() => {
+			console.log("Film bien modifié !")
 		});
 	}
 
 	return (
 		<div className="Sheet">
 			{
-				//createSheet(data.results[1])
-				/*data.results?.map(movie => (
-				  createCard(movie)
-				))*/
 				data ? createSheet(data) : null
 				// credits ? createSheetMovieCredits(credits) : null
 
 			}
 
-			<div className="crud-modal">
-				<h1>Status</h1>
-				<input
-					type="text"
-					placeholder="Cécilia"
-					onChange={(e) => {
-						setMovieStatus(e.target.value);
-					}}
-				/>
-
-				<h1>Progress</h1>
-				<input
-					type="number"
-					placeholder="Cécilia"
-					onChange={(e) => {
-						setMovieProgress(e.target.value);
-					}}
-				/>
-
-
-				<input
-					type="text"
-					placeholder="cece"
-				/>
-
-				<h1>Score</h1>
-				<input
-					type="number"
-					placeholder="Cécilia"
-					onChange={(e) => {
-						setMovieScore(e.target.value);
-					}}
-				/>
-				<button onClick={addMovie}>Save</button>
-
-				<button onClick={showList}>show</button>
-				{
-					// crudList.map((val, key) => {
-					// 	return <div>{console.log(val) + val.movieId + val.status + val.score + val.progress + val.userId}</div>
-					// })
-
-					// console.log(crudList.filter(user => user.userId == username).map(val => val.movieId))
-
-					crudList.filter(user => user.userId == username)
-						.map((val, key) => {
-							return (
-								<div key={key} className="crud-list">
-									<h1>{val.movieId}</h1>
-									<h1>{val.title}</h1>
-									<h1>{val.status}</h1>
-									<h1>{val.score}</h1>
-									<h1>{val.progress}</h1>
-									<h1>{val.userId}</h1>
-									<button onClick={() => { deleteMovie(val.movieId, val.status, val.score, val.progress, val.userId) }}>Delete</button>
-									<input type="text" id="updateInput" />
-									<button>Update</button>
-								</div>
-							)
-						})
-				}
-			</div>
+			<CrudListProps
+				setMovieStatus={setMovieStatus}
+				setMovieProgress={setMovieProgress}
+				setMovieScore={setMovieScore}
+				addMovie={addMovie}
+				showList={showList}
+				crudList={crudList}
+				username={username}
+				deleteMovie={deleteMovie}
+				setnewMovieStatus={setnewMovieStatus}
+				setnewMovieProgress={setnewMovieProgress}
+				setnewMovieScore={setnewMovieScore}
+				updateMovie={updateMovie}
+			/>
 		</div>
 	);
 }
