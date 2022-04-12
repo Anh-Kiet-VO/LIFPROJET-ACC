@@ -1,26 +1,31 @@
 import React from 'react';
 
-import * as AiIcons from "react-icons/ai";
-import * as RiIcons from "react-icons/ri"
-import * as CgIcons from "react-icons/cg"
+import * as Bs from "react-icons/bs";
+import * as Fa from "react-icons/fa";
 
 export const SidebarData = [
 	{
-		title: 'Home',
+		title: 'Accueil',
 		path: '/',
-		icon: <AiIcons.AiFillHome />,
+		icon: <Fa.FaHome />,
 		cName: 'nav-text'
 	},
 	{
-		title: 'Movie',
+		title: 'Films',
 		path: '/Movie',
-		icon: <RiIcons.RiMovie2Line />,
+		icon: <Bs.BsCameraReelsFill />,
 		cName: 'nav-text'
 	},
 	{
-		title: 'TV',
+		title: 'Séries',
 		path: '/TV',
-		icon: <RiIcons.RiMovie2Line />,
+		icon: <Bs.BsTvFill />,
+		cName: 'nav-text'
+	},
+	{
+		title: 'Utilisateurs',
+		path: '/Users',
+		icon: <Fa.FaUser />,
 		cName: 'nav-text'
 	}
 ]
