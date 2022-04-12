@@ -1,0 +1,14 @@
+.sheet {
+    width: 80%;
+    margin: auto;
+    display: flex;
+}
+
+.sheet .sheet-img {
+    width: 100%;
+    margin-right: 15px;
+}
+
+.sheet-img img {
+    width: 100%;
+}

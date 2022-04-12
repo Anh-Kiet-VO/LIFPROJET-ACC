@@ -8,6 +8,7 @@ import CompSheetMovieCredits from "../components/CompSheetMovieCredits";
 import CrudListProps from '../components/crudListProps';
 
 import '../App.css';
+import '../Sheet.css';
 
 const Moviedetails = () => {
 	const movieId = useParams();
