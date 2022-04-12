@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CardMovie from "./cardMovie"
+import "../style/search.css";
 
 const Search = () => {
 
@@ -68,13 +69,14 @@ const Search = () => {
 							setSearch(e.target.value);
 						}}
 					/>
-					<input type="submit" value="Rechercher" />
+					<input type="submit" value="Rechercher" id="search-submit" />
 				</form>
 			</div>
 
 			<div className="search-result">
 				{
 					//data1.results ? data1.results.map(movie => (createCard(movie))) : data2.results.map(movie => (createCard(movie)))
+					data2.results?.map(movie => (createCard(movie)))
 				}
 			</div>
 		</div>

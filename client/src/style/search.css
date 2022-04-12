@@ -1,0 +1,22 @@
+.search-bar {
+    margin-bottom: 20px;
+}
+
+#search-input {
+    width: 50%;
+    height: 30px;
+    border-radius: 100px;
+    padding: 0 10px;
+    color: var(--color-dark);
+    border: 2px solid var(--color-dark);
+}
+
+#search-submit {
+    background: var(--color-dark);
+    color: var(--color-light);
+    height: 30px;
+    font-weight: bold;
+    border: none;
+    padding: 0 10px;
+    cursor: pointer;
+}

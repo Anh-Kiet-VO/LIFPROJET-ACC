@@ -5,7 +5,7 @@ import Axios from "axios";
 import Search from "../components/search";
 
 import "../App.css";
-import "../style/media.css"
+import "../style/media.css";
 
 import CardMovie from '../components/cardMovie';
 

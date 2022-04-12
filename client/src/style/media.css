@@ -23,9 +23,30 @@
 }
 
 .movie-link {
-    max-width: 15%;
+    width: 13%;
+    float: left;
+    position: relative;
+}
+
+.media-img {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 140%;
+    margin-bottom: 0;
 }
 
 .movie-link img {
     width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.media-title {
+    font-weight: 600;
+    margin-top: 10px;
 }

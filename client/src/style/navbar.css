@@ -6,6 +6,7 @@
 	align-items: center;
 	position: sticky;
 	top: 0;
+	z-index: 999999;
   }
   
   .menu-bars {
@@ -24,6 +25,7 @@
 	top: 0;
 	left: -100%;
 	transition: 850ms;
+	z-index: 99999;
   }
   
   .nav-menu.active {
