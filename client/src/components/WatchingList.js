@@ -4,6 +4,8 @@ import Axios from 'axios';
 import * as Fa from "react-icons/fa";
 import * as Ai from "react-icons/ai";
 
+import '../style/cursor.css'
+
 export default function WatchingList(props) {
 	const [username, setUsername] = useState("")
 
@@ -32,7 +34,7 @@ export default function WatchingList(props) {
 								<h1>Note : {val.score} / 10</h1>
 								<h1>Progression : {val.progress}</h1>
 								{val.userId == username ? <Link to={`/edit/${val.movieId}`}><Fa.FaEdit /></Link> : null}
-								{val.userId == username ? <Ai.AiFillDelete onClick={() => { deleteMovie(val.movieId) }} /> : null}
+								{val.userId == username ? <div className='cursor-delete'><Ai.AiFillDelete onClick={() => { deleteMovie(val.movieId) }} /></div> : null}
 							</div>
 						)
 					})

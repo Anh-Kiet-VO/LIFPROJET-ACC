@@ -4,6 +4,8 @@ import Axios from 'axios';
 import * as Fa from "react-icons/fa";
 import * as Ai from "react-icons/ai";
 
+import '../style/cursor.css'
+
 export default function CompletedList(props) {
 	const [username, setUsername] = useState("")
 
