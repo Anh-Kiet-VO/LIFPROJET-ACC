@@ -10,6 +10,7 @@ import Tv from "./pages/Tv";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/profile";
+import Edit from "./pages/edit";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
 					<Route path="/movie" element={<Movie />}></Route>
 					<Route path="/tv" element={<Tv />}></Route>
 					<Route path="/profile/:id" element={<Profile />}></Route>
+					<Route path="/edit/:id" element={<Edit />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
