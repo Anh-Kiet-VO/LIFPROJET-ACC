@@ -212,15 +212,15 @@ app.delete('/delete/:movieId', (req, res) => {
 
 app.put('/update', (req, res) => {
 	const movieId = req.body.movieId;
-	console.log(movieId)
 	const status = req.body.status;
 	const score = req.body.score;
 	const progress = req.body.progress;
+	const userId = req.body.userId;
 
-
+	console.log(userId);
 
 	db.query(
-		'UPDATE watchlist SET score = ?, status = ?, progress = ? WHERE movieId = ?', [score, status, progress, movieId],
+		'UPDATE watchlist SET score = ?, status = ?, progress = ? WHERE movieId = ? AND userId= ?', [score, status, progress, movieId, userId],
 		(err, result) => {
 			if (err) {
 				console.log("Information non changé");
