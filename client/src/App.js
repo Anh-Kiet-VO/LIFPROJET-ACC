@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/profile";
 import Edit from "./pages/edit";
+import UserList from "./pages/userlist";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
 					<Route path="/tv" element={<Tv />}></Route>
 					<Route path="/profile/:id" element={<Profile />}></Route>
 					<Route path="/edit/:id" element={<Edit />}></Route>
+					<Route path="/userlist" element={<UserList />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>

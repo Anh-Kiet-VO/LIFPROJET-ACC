@@ -24,7 +24,7 @@ export const SidebarData = [
 	},
 	{
 		title: 'Utilisateurs',
-		path: '/Users',
+		path: '/userlist',
 		icon: <Fa.FaUser />,
 		cName: 'nav-text'
 	}

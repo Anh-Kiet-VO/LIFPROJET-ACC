@@ -161,6 +161,19 @@ app.get('/basicInfo/:id', (req, res) => {
 	);
 })
 
+app.get('/getAllId', (req, res) => {
+	db.query(
+		'SELECT id, username FROM users',
+		(err, result) => {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send(result);
+			}
+		}
+	);
+})
+
 app.get('/movieList/:username', (req, res) => {
 	const username = req.params.username;
 	db.query(
