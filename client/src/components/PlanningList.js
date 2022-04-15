@@ -29,7 +29,7 @@ export default function CompletedList(props) {
 							<div key={key} className="crud-list">
 								<h1>{val.title}</h1>
 								{val.userId == username ? <Link to={`/edit/${val.movieId}`}><Fa.FaEdit /></Link> : null}
-								{val.userId == username ? <button onClick={() => { deleteMovie(val.movieId) }}><Ai.AiFillDelete /></button> : null}
+								{val.userId == username ? <div className='cursor-delete'><Ai.AiFillDelete onClick={() => { deleteMovie(val.movieId) }} /></div> : null}
 							</div>
 						)
 					})

@@ -32,7 +32,7 @@ export default function WatchingList(props) {
 								<h1>Note : {val.score} / 10</h1>
 								<h1>Progression : {val.progress}</h1>
 								{val.userId == username ? <Link to={`/edit/${val.movieId}`}><Fa.FaEdit /></Link> : null}
-								{val.userId == username ? <button onClick={() => { deleteMovie(val.movieId) }}><Ai.AiFillDelete /></button> : null}
+								{val.userId == username ? <Ai.AiFillDelete onClick={() => { deleteMovie(val.movieId) }} /> : null}
 							</div>
 						)
 					})
