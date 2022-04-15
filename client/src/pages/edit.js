@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useEffectLayout } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 
@@ -6,17 +6,27 @@ import Axios from 'axios';
 function Edit() {
 	let { id } = useParams();
 
+	const [username, setUsername] = useState("")
+
+	useEffect(() => {
+		Axios.get("http://localhost:3000/login") //1
+			.then((response) => {
+				setUsername(response.data.user[0].username);
+				console.log(username)
+			})
+	}, [])
+
 	const [newmovieStatus, setnewMovieStatus] = useState("")
 	const [newmovieProgress, setnewMovieProgress] = useState(0)
 	const [newmovieScore, setnewMovieScore] = useState(0)
 
-	const updateMovie = (movieId, userId) => {
+	const updateMovie = (movieId) => {
 		Axios.put("http://localhost:3001/update", {
 			movieId: movieId,
+			userId: username,
 			status: newmovieStatus,
 			score: newmovieScore,
 			progress: newmovieProgress,
-			userId: userId
 		}).then(() => {
 			console.log("Film bien modifié !")
 		});
