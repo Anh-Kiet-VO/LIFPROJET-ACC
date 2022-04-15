@@ -103,35 +103,6 @@ const Moviedetails = () => {
 		})
 	};
 
-	const deleteMovie = (movieId) => {
-		Axios.delete(`http://localhost:3001/delete/${movieId}`).then(() => {
-			console.log("Film bien supprimé !")
-		})
-	}
-
-	const showList = () => {
-		Axios.get("http://localhost:3001/showList").
-			then((response) => {
-				setCrudList(response.data)
-			})
-	}
-
-	const [newmovieStatus, setnewMovieStatus] = useState("")
-	const [newmovieProgress, setnewMovieProgress] = useState(0)
-	const [newmovieScore, setnewMovieScore] = useState(0)
-
-	const updateMovie = (movieId, userId) => {
-		Axios.put("http://localhost:3001/update", {
-			movieId: movieId,
-			status: newmovieStatus,
-			score: newmovieScore,
-			progress: newmovieProgress,
-			userId: userId
-		}).then(() => {
-			console.log("Film bien modifié !")
-		});
-	}
-
 	return (
 		<div className="Sheet">
 			{
@@ -145,14 +116,8 @@ const Moviedetails = () => {
 				setMovieProgress={setMovieProgress}
 				setMovieScore={setMovieScore}
 				addMovie={addMovie}
-				showList={showList}
 				crudList={crudList}
 				username={username}
-				deleteMovie={deleteMovie}
-				setnewMovieStatus={setnewMovieStatus}
-				setnewMovieProgress={setnewMovieProgress}
-				setnewMovieScore={setnewMovieScore}
-				updateMovie={updateMovie}
 			/>
 		</div>
 	);
