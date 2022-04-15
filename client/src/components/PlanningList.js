@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import Axios from 'axios';
 import * as Fa from "react-icons/fa";
+import * as Ai from "react-icons/ai";
 
 export default function CompletedList(props) {
 	const [username, setUsername] = useState("")
@@ -13,6 +14,12 @@ export default function CompletedList(props) {
 			})
 	}, [])
 
+	const deleteMovie = (movieId) => {
+		Axios.delete(`http://localhost:3001/delete/${movieId}`).then(() => {
+			console.log("Film bien supprimé !")
+		})
+	}
+
 	return (
 		<div className="Planning-list">
 			{
@@ -22,6 +29,7 @@ export default function CompletedList(props) {
 							<div key={key} className="crud-list">
 								<h1>{val.title}</h1>
 								{val.userId == username ? <Link to={`/edit/${val.movieId}`}><Fa.FaEdit /></Link> : null}
+								{val.userId == username ? <button onClick={() => { deleteMovie(val.movieId) }}><Ai.AiFillDelete /></button> : null}
 							</div>
 						)
 					})
