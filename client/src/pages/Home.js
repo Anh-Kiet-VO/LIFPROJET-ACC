@@ -95,7 +95,6 @@ function Home() {
 					<button onClick={logout}>Logout</button>
 				)
 			}
-			{localStorage.getItem("token") == null ? null : "Bonjour " + username}
 		</div>
 	);
 }
