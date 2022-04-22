@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
+import * as CgIcons from "react-icons/cg";
 
 import { SidebarData } from './SidebarData'
 
@@ -50,17 +51,18 @@ function Navbar() {
 			<IconContext.Provider value={{ color: 'white' }}>
 				<div className="topbar">
 					<div className='navbar'>
+						<Link to='#' className='menu-bars'>
+							<FaIcons.FaBars onClick={showSidebar} />
+						</Link>
 						{userlist.filter(user => user.username == loginUsername)
 							.map((val, key) => {
 								return (
 									<div key={key} className="crud-list">
-										<Link to={`/profile/${val.id}`}><h1>{val.username}</h1></Link>
+										<Link to={`/profile/${val.id}`}><CgIcons.CgProfile size={30} /></Link>
 									</div>
 								)
 							})}
-						<Link to='#' className='menu-bars'>
-							<FaIcons.FaBars onClick={showSidebar} />
-						</Link>
+
 					</div>
 				</div>
 				<nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>

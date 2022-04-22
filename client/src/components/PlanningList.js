@@ -20,6 +20,7 @@ export default function CompletedList(props) {
 		Axios.delete(`http://localhost:3001/delete/${movieId}`).then(() => {
 			console.log("Film bien supprimé !")
 		})
+		window.location.reload();
 	}
 
 	return (
@@ -30,8 +31,8 @@ export default function CompletedList(props) {
 						return (
 							<div key={key} className="crud-list">
 								<h1>{val.title}</h1>
-								{val.userId == username ? <Link to={`/edit/${val.movieId}`}><Fa.FaEdit /></Link> : null}
-								{val.userId == username ? <div className='cursor-delete'><Ai.AiFillDelete onClick={() => { deleteMovie(val.movieId) }} /></div> : null}
+								{val.userId == username ? <Link to={`/edit/${val.movieId}`}><Fa.FaEdit size={30} /></Link> : null}
+								{val.userId == username ? <div className='cursor-delete'><Ai.AiFillDelete size={30} onClick={() => { deleteMovie(val.movieId) }} /></div> : null}
 							</div>
 						)
 					})

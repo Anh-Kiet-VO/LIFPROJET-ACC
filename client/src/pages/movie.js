@@ -45,7 +45,6 @@ function Movie() {
 		}*/
 
 		loadMovieData();
-		/*userAuthenticated();*/
 	}, [])
 
 	const loadMovieData = async () => {

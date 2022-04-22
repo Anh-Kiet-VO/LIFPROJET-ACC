@@ -10,6 +10,7 @@ import CrudListProps from '../components/crudListProps';
 import '../App.css';
 import '../Sheet.css';
 
+
 const Moviedetails = () => {
 	const movieId = useParams();
 
@@ -42,6 +43,8 @@ const Moviedetails = () => {
 			});
 	}
 
+	const [isVisible, setVisible] = useState(false);
+
 	const loadMovieCredits = async () => {
 		await fetch(API_URL_CREDITS)
 			.then(res => res.json())
@@ -51,6 +54,9 @@ const Moviedetails = () => {
 	}
 
 	const createSheet = (media) => {
+		const addListCrud = () => {
+			setVisible(!isVisible);
+		}
 		return (
 			<CompSheet
 				key={media.id}
@@ -61,6 +67,7 @@ const Moviedetails = () => {
 				genres={media.genre_ids}
 				score={media.vote_average}
 				url={"https://image.tmdb.org/t/p/w500" + media.poster_path}
+				addListCrud={addListCrud}
 			/>
 		)
 	}
@@ -118,6 +125,7 @@ const Moviedetails = () => {
 				addMovie={addMovie}
 				crudList={crudList}
 				username={username}
+				className={isVisible ? null : 'hidden'}
 			/>
 		</div>
 	);

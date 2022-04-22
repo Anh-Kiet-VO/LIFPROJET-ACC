@@ -43,7 +43,6 @@ function Tv() {
 		}*/
 
 		loadMovieData();
-		/*userAuthenticated();*/
 	}, [])
 
 	const loadMovieData = async () => {

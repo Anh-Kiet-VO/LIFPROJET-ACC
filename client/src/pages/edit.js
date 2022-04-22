@@ -32,40 +32,51 @@ function Edit() {
 		});
 	}
 
+	const [isVisible, setVisible] = useState(false);
+
+	const editMovie = (event) => {
+		event.preventDefault();
+		updateMovie(id);
+		setVisible(!isVisible);
+	}
+
 	return (
 		<div>
 			{
 				<div className="salutCecilia">
+					<form onSubmit={editMovie}>
+						<h1>EDIT</h1>
+						<h1>Status</h1>
+						<input
+							type="text"
+							placeholder="Completed / Watching"
+							onChange={(e) => {
+								setnewMovieStatus(e.target.value);
+							}}
+						/>
 
-					<h1>EDIT</h1>
-					<h1>Status</h1>
-					<input
-						type="text"
-						placeholder="Completed / Watching"
-						onChange={(e) => {
-							setnewMovieStatus(e.target.value);
-						}}
-					/>
+						<h1>Progession</h1>
+						<input
+							type="number"
+							placeholder="Progession"
+							onChange={(e) => {
+								setnewMovieProgress(e.target.value);
+							}}
+						/>
 
-					<h1>Progession</h1>
-					<input
-						type="number"
-						placeholder="Progession"
-						onChange={(e) => {
-							setnewMovieProgress(e.target.value);
-						}}
-					/>
-
-					<h1>Note</h1>
-					<input
-						type="number"
-						placeholder=".../10"
-						onChange={(e) => {
-							setnewMovieScore(e.target.value);
-						}}
-					/>
-					<button onClick={() => { updateMovie(id) }}>Editer</button>
+						<h1>Note</h1>
+						<input
+							type="number"
+							placeholder=".../10"
+							onChange={(e) => {
+								setnewMovieScore(e.target.value);
+							}}
+						/>
+						<button type='submit'>Editer</button>
+					</form>
+					<div className={isVisible ? null : 'hidden'}><p>Données bien modifiés !</p></div>
 				</div>
+
 
 
 			}
