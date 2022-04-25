@@ -32,6 +32,7 @@ const Moviedetails = () => {
 	useEffect(() => {
 		loadMovieData();
 		setMovieId(movieId.id)
+		loadMovieCredits();
 	}, [])
 
 	const loadMovieData = async () => {
@@ -72,12 +73,17 @@ const Moviedetails = () => {
 		)
 	}
 
-	const createSheetMovieCredits = (media) => {
-		return (
-			<CompSheetMovieCredits
-			// A faire en fonction des crédits qu'on veut afficher
-			/>
-		)
+
+
+	const createSheetMovieCredits = (credits) => {
+		if (credits != credits.length) {
+			return (
+				<CompSheetMovieCredits
+					cast={credits.cast}
+				/>
+			)
+		}
+
 	}
 
 	const [movieStatus, setMovieStatus] = useState("")
@@ -91,9 +97,7 @@ const Moviedetails = () => {
 	useEffect(() => {
 		Axios.get("http://localhost:3000/login") //1
 			.then((response) => {
-				// console.log(response.data.user[0].username);
 				setUsername(response.data.user[0].username);
-				//console.log(response)
 			})
 	}, [])
 
@@ -105,8 +109,6 @@ const Moviedetails = () => {
 			score: movieScore,
 			progress: movieProgress,
 			userId: username
-		}).then(() => {
-			console.log("Info bien envoyé !")
 		})
 	};
 
@@ -114,8 +116,9 @@ const Moviedetails = () => {
 		<div className="Sheet">
 			{
 				data ? createSheet(data) : null
-				// credits ? createSheetMovieCredits(credits) : null
-
+			}
+			{
+				credits ? createSheetMovieCredits(credits) : null
 			}
 
 			<CrudListProps

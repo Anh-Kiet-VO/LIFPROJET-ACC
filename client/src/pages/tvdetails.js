@@ -31,6 +31,7 @@ const TVdetails = () => {
     useEffect(() => {
         loadTvData();
         setMovieId(movieId.id)
+        loadTvCredits();
     }, [])
 
     const loadTvData = async () => {
@@ -65,12 +66,14 @@ const TVdetails = () => {
         )
     }
 
-    const createSheetTvCredits = (media) => {
-        return (
-            <CompSheetTvCredits
-            // A faire en fonction des crédits qu'on veut afficher
-            />
-        )
+    const createTvCredits = (credits) => {
+        if (credits != credits.length) {
+            return (
+                <CompSheetTvCredits
+                    cast={credits.cast}
+                />
+            )
+        }
     }
 
     const [movieStatus, setMovieStatus] = useState("")
@@ -84,9 +87,7 @@ const TVdetails = () => {
     useEffect(() => {
         Axios.get("http://localhost:3000/login") //1
             .then((response) => {
-                // console.log(response.data.user[0].username);
                 setUsername(response.data.user[0].username);
-                //console.log(response)
             })
     }, [])
 
@@ -98,8 +99,6 @@ const TVdetails = () => {
             score: movieScore,
             progress: movieProgress,
             userId: username
-        }).then(() => {
-            console.log("Info bien envoyé !")
         })
     };
 
@@ -107,12 +106,12 @@ const TVdetails = () => {
     return (
         <div className="Sheet">
             {
-                //createSheet(data.results[1])
-                /*data.results?.map(movie => (
-                  createCard(movie)
-                ))*/
                 data ? createSheet(data) : null
-                // credits ? createTvCredits(credits) : null
+
+            }
+
+            {
+                credits ? createTvCredits(credits) : null
             }
 
             <CrudListProps
