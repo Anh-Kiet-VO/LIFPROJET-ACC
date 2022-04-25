@@ -7,6 +7,7 @@ Démarrer Apache et MySQL
 ---
 
 La base de donnée sera accessible via localhost/phpymadmin
+Démarrez ``Apache`` et ``MySQL``
 ![Image XAMPP](https://cdn.discordapp.com/attachments/715537719287087117/959807860987011152/unknown.png)
 
 Après démarrage de la BDD installez le [script](https://github.com/Anh-Kiet-VO/LIFPROJET-ACC/blob/master/lifprojet.sql)
