@@ -9,6 +9,7 @@ La base de donnée sera accessible via localhost/phpymadmin
 
 Après démarrage de la BDD installez le [script](https://github.com/Anh-Kiet-VO/LIFPROJET-ACC/blob/master/lifprojet.sql)
 
+
 Puis importez le script dans votre phpmyadmin 
 ![Image PhpMyAdmin](https://cdn.discordapp.com/attachments/680775708997451791/968081555463479296/unknown.png)
 
