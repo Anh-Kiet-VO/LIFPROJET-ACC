@@ -1,23 +1,26 @@
 # LIFPROJET-ACC
 
 ## Installation base de donnée :
-Installer XAMPP
+Installer [XAMPP](https://www.apachefriends.org/fr/index.html) pour avoir une base de donnée en localhost
 Démarrer Apache et MySQL
+
 La base de donnée sera accessible via localhost/phpymadmin
 ![Image XAMPP](https://cdn.discordapp.com/attachments/715537719287087117/959807860987011152/unknown.png)
 
-## Une fois que c'est fait il faut créer la base de donnée :
-Nouvelle base de données et le nommer "lifprojet"
+Après démarrage de la BDD installez le [script](https://github.com/Anh-Kiet-VO/LIFPROJET-ACC/blob/master/lifprojet.sql)
 
-table watchlist avec id en clé primaire et en Auto Incremente
-![Crud](https://cdn.discordapp.com/attachments/680775708997451791/965514979392516137/unknown.png)
-
-table users avec id en clé primaire et en Auto Incremente
-![User](https://cdn.discordapp.com/attachments/715537719287087117/959808366425829417/unknown.png)
+Puis importez le script dans votre phpmyadmin 
+![Image PhpMyAdmin](https://cdn.discordapp.com/attachments/680775708997451791/968081555463479296/unknown.png)
 
 ## Démarrer notre API :
 ```
 cd server
 npm install
 npm run start
+```
+
+## Problème rencontré :
+Si vous avez une erreur avec my sql, dans le dossier ``server`` executez  la commande suivante :
+```
+npm install mysql --save
 ```
