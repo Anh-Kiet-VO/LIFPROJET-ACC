@@ -10,7 +10,6 @@ import CrudListProps from '../components/crudListProps';
 import '../App.css';
 import '../Sheet.css';
 
-
 const Moviedetails = () => {
 	const movieId = useParams();
 
@@ -113,7 +112,7 @@ const Moviedetails = () => {
 	};
 
 	return (
-		<div className="Sheet">
+		<div className="sheet-page">
 			{
 				data ? createSheet(data) : null
 			}

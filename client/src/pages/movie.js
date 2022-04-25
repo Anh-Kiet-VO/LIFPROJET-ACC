@@ -40,9 +40,9 @@ function Movie() {
 	let navigate = useNavigate();
 
 	useEffect(() => {
-		/*if (localStorage.getItem("token") == null) {
+		if (localStorage.getItem("token") == null) {
 			navigate("/");
-		}*/
+		}
 
 		loadMovieData();
 	}, [])

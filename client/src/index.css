@@ -1,16 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 
 :root {
-  --color-dark: #161616;
-  --color-accent: #557adf;
-  --color-light: #fff;
+  --color-very-dark: #000;
+  --color-dark: #1c1c1c;
+  --color-light: #eeedf2;
+  --color-1: #5d31ff;
+  --color-2: #def241;
+  --color-3: #f88cd5;
+  --font-1: 'Manrope';
+  --font-2: 'Shrikhand';
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, 'Manrope', sans-serif;
+  font-family: -apple-system, var(--font-1), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--color-dark);
+  color: var(--color-light);
 }
 
 code {

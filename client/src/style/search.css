@@ -40,7 +40,7 @@
     
 }
 
-.active{
+li.active{
 	border: 2px solid #000;
     font-weight: bold;
 }

@@ -34,18 +34,33 @@ const SearchTv = () => {
 	}
 
 	const createCard = (movie) => {
-		return (
-			<CardTv
-				id={movie.id}
-				key={movie.id}
-				getMovieInfo={getMovieInfo}
-				movieIdDetail={movieId}
-				title={movie.name}
-				score={movie.vote_average}
-				url={IMG_URL_POSTER + movie.poster_path}
+		if(movie.poster_path == null) {
+			return (
+				<CardTv
+					id={movie.id}
+					key={movie.id}
+					getMovieInfo={getMovieInfo}
+					movieIdDetail={movieId}
+					title={movie.name}
+					score={movie.vote_average}
+					url={'/no_image.png'}
 
-			/>
-		)
+				/>
+			)
+		} else {
+			return (
+				<CardTv
+					id={movie.id}
+					key={movie.id}
+					getMovieInfo={getMovieInfo}
+					movieIdDetail={movieId}
+					title={movie.name}
+					score={movie.vote_average}
+					url={IMG_URL_POSTER + movie.poster_path}
+
+				/>
+			)
+		}
 	}
 
 	return (

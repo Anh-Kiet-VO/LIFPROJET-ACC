@@ -5,6 +5,7 @@ import Axios from "axios";
 import SearchTv from "../components/searchTv";
 
 import "../App.css";
+import "../style/media.css";
 
 import CardTv from '../components/cardTv';
 
@@ -38,9 +39,9 @@ function Tv() {
 	let navigate = useNavigate();
 
 	useEffect(() => {
-		/*if (localStorage.getItem("token") == null) {
+		if (localStorage.getItem("token") == null) {
 			navigate("/");
-		}*/
+		}
 
 		loadMovieData();
 	}, [])

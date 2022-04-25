@@ -8,6 +8,6 @@
 .home button {
   border: none;
   cursor: pointer;
-  background: var(--color-dark);
+  background: var(--color-very-dark);
   color: var(--color-light);
 }
