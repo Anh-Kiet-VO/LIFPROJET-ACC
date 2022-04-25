@@ -12,7 +12,6 @@ function Edit() {
 		Axios.get("http://localhost:3000/login") //1
 			.then((response) => {
 				setUsername(response.data.user[0].username);
-				console.log(username)
 			})
 	}, [])
 
@@ -27,8 +26,6 @@ function Edit() {
 			status: newmovieStatus,
 			score: newmovieScore,
 			progress: newmovieProgress,
-		}).then(() => {
-			console.log("Film bien modifié !")
 		});
 	}
 
@@ -40,20 +37,22 @@ function Edit() {
 		setVisible(!isVisible);
 	}
 
+	const handleChange = (e) => {
+		setnewMovieStatus(e.target.value);
+	}
+
 	return (
 		<div>
 			{
 				<div className="salutCecilia">
 					<form onSubmit={editMovie}>
-						<h1>EDIT</h1>
 						<h1>Status</h1>
-						<input
-							type="text"
-							placeholder="Completed / Watching"
-							onChange={(e) => {
-								setnewMovieStatus(e.target.value);
-							}}
-						/>
+						<select onChange={(e) => handleChange(e)}>
+							<option value="">Status</option>
+							<option value="Completed">Fini</option>
+							<option value="Watching">En train de regarder</option>
+							<option value="Planning">A regarder</option>
+						</select>
 
 						<h1>Progession</h1>
 						<input
