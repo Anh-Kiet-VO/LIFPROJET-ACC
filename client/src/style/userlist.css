@@ -1,0 +1,27 @@
+.userlist {
+    width: 70%;
+    margin: 80px auto;
+}
+
+.userlist h1 {
+    font-family: var(--font-2);
+    letter-spacing: 2px;
+    font-size: 2em;
+    background-image: linear-gradient(90deg, var(--color-1) 50%, var(--color-dark));
+    padding: 0 10px;
+    display: inline-block;
+}
+
+.userlist h2 {
+    
+}
+
+.userlist a {
+    color: var(--color-2);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.userlist a:hover {
+    color: var(--color-light);
+}

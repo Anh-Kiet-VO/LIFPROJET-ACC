@@ -17,7 +17,7 @@ function Navbar() {
 
 	const [loginUsername, setLoginUsername] = useState("")
 
-	userlist.filter(user => user.username == loginUsername)
+	/*userlist.filter(user => user.username == loginUsername)
 		.map((val, key) => {
 			return (
 				<div key={key} className="crud-list">
@@ -25,7 +25,7 @@ function Navbar() {
 				</div>
 			)
 		})
-
+		*/
 
 	useEffect(() => {
 		axios.get("http://localhost:3000/login") //1
@@ -47,45 +47,43 @@ function Navbar() {
 	}
 
 	return (
-		<>
-			<IconContext.Provider value={{ color: 'white' }}>
-				<div className="topbar">
-					<div className='navbar'>
-						<Link to='#' className='menu-bars'>
-							<FaIcons.FaBars onClick={showSidebar} />
-						</Link>
-						{userlist.filter(user => user.username == loginUsername)
-							.map((val, key) => {
-								return (
-									<div key={key} className="crud-list">
-										<Link to={`/profile/${val.id}`}><CgIcons.CgProfile size={30} /></Link>
-									</div>
-								)
-							})}
-
-					</div>
-				</div>
-				<nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-					<ul className='nav-menu-items' onClick={showSidebar}>
-						<li className='navbar-toggle'>
-							<Link to="#" className='menu-bars'>
-								<AiIcons.AiOutlineClose />
-							</Link>
-						</li>
-						{SidebarData.map((item, index) => {
+		<IconContext.Provider value={{ color: 'white' }}>
+			<div className="topbar">
+				<div className='navbar'>
+					<Link to='#' className='menu-bars'>
+						<FaIcons.FaBars onClick={showSidebar} />
+					</Link>
+					{userlist.filter(user => user.username == loginUsername)
+						.map((val, key) => {
 							return (
-								<li key={index} className={item.cName}>
-									<Link to={item.path}>
-										{item.icon}
-										<span>{item.title}</span>
-									</Link>
-								</li>
+								<div key={key} className="crud-list">
+									<Link to={`/profile/${val.id}`}><CgIcons.CgProfile />texte</Link>
+								</div>
 							)
 						})}
-					</ul>
-				</nav>
-			</IconContext.Provider>
-		</>
+
+				</div>
+			</div>
+			<nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+				<ul className='nav-menu-items' onClick={showSidebar}>
+					<li className='navbar-toggle'>
+						<Link to="#" className='menu-bars'>
+							<AiIcons.AiOutlineClose />
+						</Link>
+					</li>
+					{SidebarData.map((item, index) => {
+						return (
+							<li key={index} className={item.cName}>
+								<Link to={item.path}>
+									{item.icon}
+									<span>{item.title}</span>
+								</Link>
+							</li>
+						)
+					})}
+				</ul>
+			</nav>
+		</IconContext.Provider>
 	)
 }
 

@@ -57,6 +57,9 @@ const Moviedetails = () => {
 		const addListCrud = () => {
 			setVisible(!isVisible);
 		}
+
+		console.log(media.genres);
+		
 		return (
 			<CompSheet
 				key={media.id}
@@ -65,6 +68,7 @@ const Moviedetails = () => {
 				description={media.overview}
 				date={media.release_date}
 				genres={media.genre_ids}
+				runtime={media.runtime}
 				score={media.vote_average}
 				url={"https://image.tmdb.org/t/p/w500" + media.poster_path}
 				addListCrud={addListCrud}

@@ -1,4 +1,13 @@
-.sheet, .sheet-credits {
+.sheet {
+    width: 70%;
+    margin: 80px auto;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: auto;
+    grid-gap: 15px;
+}
+
+.sheet-credits {
     width: 70%;
     margin: 80px auto;
     display: flex;
@@ -6,18 +15,37 @@
 }
 
 .sheet .sheet-img {
-    width: 20%;
-    margin-right: 15px;
+    width: 100%;
 }
 
 .sheet-img img {
     width: 100%;
 }
 
+.sheet-page h1 {
+    grid-column-start: span 2;
+    font-family: var(--font-2);
+    font-size: 2em;
+    color: var(--color-1);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--color-very-dark);
+}
+
+.sheet-page .icon-star {
+    font-size: .7em;
+    color: var(--color-light);
+    margin-right: 10px;
+}
+
+.card-text {
+    display: block-inline;
+}
+
 .card-text h2 {
     font-family: var(--font-2);
-    letter-spacing: 2px;
-    font-size: 2em;
+    font-size: 1.6em;
     margin: 0;
     display: inline-block;
     border-bottom: 4px solid var(--color-2);
@@ -33,14 +61,16 @@ mark {
 
 .sheet-credits {
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: start;
+    display: flex;
 }
 
-.sheet h1, .sheet-credits h1 {
+.sheet-credits h1 {
     width: 100%;
 }
 
 .sheet-credits-img {
+    margin: auto;
     width: 100px;
     height: 100px;
 }

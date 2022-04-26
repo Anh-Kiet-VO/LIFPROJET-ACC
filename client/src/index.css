@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
 
 :root {
   --color-very-dark: #000;
@@ -9,7 +9,7 @@
   --color-2: #def241;
   --color-3: #f88cd5;
   --font-1: 'Manrope';
-  --font-2: 'Shrikhand';
+  --font-2: 'Archivo Black';
 }
 
 body {
