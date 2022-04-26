@@ -7,16 +7,17 @@ Anh-Kiet VO (p1907921 - anh-kiet.vo@etu.univ-lyon1.fr)
 -----------------
 
 ## Fonctionnalités :
-- [ ] Catalogue de films / séries (informations générales)
-- [ ] Suivi des films / séries
-- [ ] Connexion / déconnexion
-- [ ] Profil d'utilisateurs
-- [ ] Espace commentaires sous chaque film / série
-- [ ] Notes pour chaque film / série
+- [X] Catalogue de films / séries (informations générales)
+- [X] Suivi des films / séries
+- [X] Connexion / déconnexion
+- [X] Profil d'utilisateurs
+- [X] Barre de navigation
+- [X] Détail d'un film / série
+- [X] Notes pour chaque film / série
 
 - [ ] Recommandations
 - [ ] Voir quand sortira un épisode / film
-- [ ] Création de listes de films / séries, privées ou non
+- [ ] Espace commentaires sous chaque film / série
 
 -----------------
 
@@ -28,23 +29,19 @@ Sujet : [Mise en place d'un site web](http://cazabetremy.fr/wiki/doku.php?id=pro
 
 ### 🔖 Organisation de l'archive :  
 ```
-toto/
-├─ 
-toto/
-├─ toto
-toto/
-├─ toto
-toto/
-├─ toto
-toto/
-├─ toto/
-│  ├─ toto
-├─ toto/
-│  ├─ 
-├─ toto/
-│  ├─ 
-├─ 
-toto
+client/ (Le frontend)
+├─ public/
+├─ src/
+│  ├─ components (Les composents du site)
+│  ├─ pages (Les pages du site)
+│  ├─ style (Les fichiers CSS)
+│ package-lock.json (Tous les paquets utilisés côté frontend)
+│ package.json (Tous les paquets utilisés côté frontend)
+server/ (Le backend)
+├─ index.js (Le fichier contenant les interactions avec la BDD)
+│ package-lock.json (Tous les paquets utilisés côté backend)
+│ package.json (Tous les paquets utilisés côté backend)
+lifprojet.sql (Script pour installer la BDD)
 ```
 
 -----------------
