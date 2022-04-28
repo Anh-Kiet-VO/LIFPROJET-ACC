@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 
 import '../style/userlist.css';
 
+/*
+	Page qui permet de voir tous les utilisateurs du site
+	si nous souhaitons consulter la liste d'un autre utilisateur
+*/
 function Userlist() {
 	const [userlist, setUserlist] = useState([]);
 

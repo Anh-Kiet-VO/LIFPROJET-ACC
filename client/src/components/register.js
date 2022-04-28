@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 
+/*
+	Permet à l'utilisateur de s'enregistrer
+*/
 export default function Register(props) {
 	const [isActive, setActive] = useState("false");
 

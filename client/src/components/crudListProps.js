@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+
+/*
+	Permet à l'utilisateur d'ajouter un film/série à sa liste
+*/
 export default function CrudListProps(props) {
 	const classes = `crud-modal ${props.className}`;
 
 	const [isVisible, setVisible] = useState(false);
-	const [statusOpt, setStatusOpt] = useState("");
 
 	const addMovie = (event) => {
 		event.preventDefault();

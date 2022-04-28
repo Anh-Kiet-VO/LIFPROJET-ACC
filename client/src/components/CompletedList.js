@@ -6,15 +6,22 @@ import * as Ai from "react-icons/ai";
 
 import '../style/cursor.css'
 
+/*
+	Section des films/séries complété par l'utilisateur
+	Composant utilisé dans la page Profile
+*/
+
 export default function CompletedList(props) {
 	const [username, setUsername] = useState("")
 
+	// On get le pseudo de l'utilisateur pour vérifier s'il peut modifier/éditer la liste
 	useEffect(() => {
 		Axios.get("http://localhost:3000/login") //1
 			.then((response) => {
 				setUsername(response.data.user[0].username);
 			})
 	}, [])
+
 	const deleteMovie = (movieId) => {
 		Axios.delete(`http://localhost:3001/delete/${movieId}`).then(() => {
 			console.log("Film bien supprimé !");

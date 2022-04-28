@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { IconContext } from 'react-icons/lib';
 import * as Gi from "react-icons/gi";
 
+/*
+    Les acteurs qui ont participé au film
+*/
 export default function CompSheetMovieCredits(props) {
     return (
         <IconContext.Provider value={{ className: 'icon-star' }}>

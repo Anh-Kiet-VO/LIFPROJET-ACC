@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 
-
+/*
+	Page pour éditer le film/série que nous avons dans la liste
+*/
 function Edit() {
+	// On récupère l'id présent dans l'url
 	let { id } = useParams();
 
 	const [username, setUsername] = useState("")
@@ -15,10 +18,12 @@ function Edit() {
 			})
 	}, [])
 
+	// useState permettant de récuperer les nouveaux données de l'utilisateur
 	const [newmovieStatus, setnewMovieStatus] = useState("")
 	const [newmovieProgress, setnewMovieProgress] = useState(0)
 	const [newmovieScore, setnewMovieScore] = useState(0)
 
+	// Requête vers notre API pour mettre à jour le détail d'un film/série
 	const updateMovie = (movieId) => {
 		Axios.put("http://localhost:3001/update", {
 			movieId: movieId,
@@ -31,6 +36,7 @@ function Edit() {
 
 	const [isVisible, setVisible] = useState(false);
 
+	// Après que l'utilisateur a envoyé son formulaire, on appelle la fonction qui va envoyer les données
 	const editMovie = (event) => {
 		event.preventDefault();
 		updateMovie(id);

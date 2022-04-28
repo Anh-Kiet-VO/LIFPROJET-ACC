@@ -6,6 +6,9 @@ import * as Gi from "react-icons/gi";
 
 import '../style/cursor.css';
 
+/*
+	Détail d'un film tel que le synopsis, la date de sortie...
+*/
 export default function CompSheet(props) {
 	const addListCrud = () => {
 		props.addListCrud();

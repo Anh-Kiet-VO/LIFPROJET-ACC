@@ -8,6 +8,9 @@ import Login from '../components/login'
 
 import "../style/home.css";
 
+/*
+	Accueil du site, il ne sert qu'à gérer l'authentification
+*/
 function Home() {
 	const [usernameReg, setUsernameReg] = useState('');
 	const [passwordReg, setPasswordReg] = useState('');
@@ -25,6 +28,7 @@ function Home() {
 
 	Axios.defaults.withCredentials = true;
 
+	// Requête vers l'API pour envoyer les données du nouveau utilisateur enregistré
 	const register = () => {
 		Axios.post('http://localhost:3001/register', {
 			username: usernameReg,
@@ -34,6 +38,7 @@ function Home() {
 		});
 	};
 
+	// Requête vers l'API pour envoyer les données de l'utilisateur connecté
 	const login = () => {
 		Axios.post('http://localhost:3000/login', {
 			username: username,
@@ -48,6 +53,7 @@ function Home() {
 		});
 	};
 
+	// Vérifie si un utilisateur est connecté
 	const userAuthenticated = () => {
 		Axios.get("http://localhost:3001/isUserAuth", {
 			headers: {
@@ -58,11 +64,13 @@ function Home() {
 		})
 	}
 
+	// Déconnecte l'utilisateur en supprimant le token créer suite à la connexion
 	const logout = () => {
 		localStorage.removeItem("token");
 		window.location.reload(false)
 	}
 
+	// Récupère le username si l'utilisateur est connecté
 	useEffect(() => {
 		Axios.get("http://localhost:3000/login")
 			.then((response) => {

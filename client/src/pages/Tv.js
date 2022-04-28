@@ -9,6 +9,10 @@ import "../style/media.css";
 
 import CardTv from '../components/cardTv';
 
+/*
+	Page des séries, on peut y retrouver les séries du moment et faire les recherches des séries
+	chaque carte renvoie au détail d'une série
+*/
 function Tv() {
 
 	const [movieId, setMovieId] = useState('');
@@ -21,19 +25,10 @@ function Tv() {
 	const LANGUAGE = '&language=fr';
 	const API_URL = 'https://api.themoviedb.org/3/discover/tv?' + API_KEY + `&sort_by=popularity.desc&page=${page}` + LANGUAGE;/*+ '&sort_by=popularity.desc&page=1'*/
 
+
 	const getMovieInfo = (e) => {
 		const getId = e.currentTarget.attributes.id.value;
 		setMovieId(getId);
-	}
-
-	const userAuthenticated = () => {
-		Axios.get("http://localhost:3001/isUserAuth", {
-			headers: {
-				"x-access-token": localStorage.getItem("token"),
-			},
-		}).then((response) => {
-			console.log(response);
-		})
 	}
 
 	let navigate = useNavigate();
@@ -52,20 +47,6 @@ function Tv() {
 			.then(data => {
 				setData(data);
 			});
-	}
-
-	const createCard = (movie) => {
-		return (
-			<CardTv
-				id={movie.id}
-				key={movie.id}
-				getMovieInfo={getMovieInfo}
-				movieIdDetail={movieId}
-				title={movie.name}
-				score={movie.vote_average}
-				url={'https://image.tmdb.org/t/p/w500' + movie.poster_path}
-			/>
-		)
 	}
 
 	return (

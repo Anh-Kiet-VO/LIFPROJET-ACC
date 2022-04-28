@@ -3,6 +3,9 @@ import React from 'react';
 import * as Bs from "react-icons/bs";
 import * as Fa from "react-icons/fa";
 
+/*
+	Affichage dans la barre de navigation vertical
+*/
 export const SidebarData = [
 	{
 		title: 'Accueil',

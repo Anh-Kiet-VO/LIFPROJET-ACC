@@ -1,5 +1,8 @@
 import React from 'react'
 
+/*
+    Détail d'une série tel que le synopsis, la date de sortie...
+*/
 export default function CompSheetTv(props) {
     console.log(props.genres);
 

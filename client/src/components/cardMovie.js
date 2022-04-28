@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
+/*
+	Permet de créer une carte d'un film
+*/
 export default function CardMovie(props) {
 	return (
 		<div key={props.id} id={props.id} className='movie-link' onClick={props.getMovieInfo}>

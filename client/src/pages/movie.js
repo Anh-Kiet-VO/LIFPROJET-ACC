@@ -7,8 +7,10 @@ import Search from "../components/search";
 import "../App.css";
 import "../style/media.css";
 
-import CardMovie from '../components/cardMovie';
-
+/*
+	Page des films, on peut y retrouver les films du moment et faire les recherches des films
+	chaque carte renvoie au détail d'un film
+*/
 function Movie() {
 
 	const [movieId, setMovieId] = useState('');
@@ -22,23 +24,9 @@ function Movie() {
 	const LANGUAGE = '&language=fr';
 	const API_URL = 'https://api.themoviedb.org/3/discover/movie?' + API_KEY + `&sort_by=popularity.desc&page=${page}` + LANGUAGE;/*+ '&sort_by=popularity.desc&page=1'*/
 
-	const getMovieInfo = (e) => {
-		const getId = e.currentTarget.attributes.id.value;
-		setMovieId(getId);
-	}
-
-	const userAuthenticated = () => {
-		Axios.get("http://localhost:3001/isUserAuth", {
-			headers: {
-				"x-access-token": localStorage.getItem("token"),
-			},
-		}).then((response) => {
-			console.log(response);
-		})
-	}
-
 	let navigate = useNavigate();
 
+	// Si l'utilisateur n'est pas connecté on le renvoie vers la page de connexion
 	useEffect(() => {
 		if (localStorage.getItem("token") == null) {
 			navigate("/");
@@ -47,6 +35,7 @@ function Movie() {
 		loadMovieData();
 	}, [])
 
+	// Récupère les données des films
 	const loadMovieData = async () => {
 		await fetch(API_URL)
 			.then(res => res.json())

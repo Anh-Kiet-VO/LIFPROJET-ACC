@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import CardTv from "./cardTv"
 
+/*
+	La barre de recherche qui va nous permettre de fetch la série
+	indiqué par l'utilisateur.
+*/
 const SearchTv = () => {
 
 	const [movieId, setMovieId] = useState('');
@@ -34,7 +38,7 @@ const SearchTv = () => {
 	}
 
 	const createCard = (movie) => {
-		if(movie.poster_path == null) {
+		if (movie.poster_path == null) {
 			return (
 				<CardTv
 					id={movie.id}

@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 
+/*
+	Composant qui permet à l'utilisateur de se connecter
+*/
 export default function Login(props) {
 	const [isActive, setActive] = useState("false");
 
@@ -14,7 +17,7 @@ export default function Login(props) {
 				<h1>Login</h1>
 				<input
 					type="text"
-					placeholder="Cécilia"
+					placeholder="Username..."
 					onChange={(e) => {
 						props.setUsername(e.target.value);
 					}}

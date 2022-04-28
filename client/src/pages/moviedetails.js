@@ -11,6 +11,9 @@ import CrudListProps from '../components/crudListProps';
 import '../App.css';
 import '../Sheet.css';
 
+/*
+	Page permettant d'avoir les détails d'un film
+*/
 const Moviedetails = () => {
 	const movieId = useParams();
 
@@ -18,9 +21,9 @@ const Moviedetails = () => {
 
 	const LANGUAGE = '&language=fr';
 
-	const TRAILER = '&append_to_response=videos'
+	const API_URL_TRAILER = 'https://api.themoviedb.org/3/movie/' + movieId.id + '?' + API_KEY + '&append_to_response=videos';
 
-	const API_URL_DETAILS = 'https://api.themoviedb.org/3/movie/' + movieId.id + '?' + API_KEY + LANGUAGE + TRAILER;
+	const API_URL_DETAILS = 'https://api.themoviedb.org/3/movie/' + movieId.id + '?' + API_KEY + LANGUAGE;
 	const API_URL_CREDITS = 'https://api.themoviedb.org/3/movie/' + movieId.id + '/credits?' + API_KEY + LANGUAGE;
 
 	const [data, setData] = useState([]);
@@ -33,24 +36,35 @@ const Moviedetails = () => {
 
 	const [trailer, setTrailer] = useState([]);
 
+	// Récupère les données du film
 	useEffect(() => {
 		loadMovieData();
 		setMovieId(movieId.id)
 		loadMovieCredits();
+		loadTrailer();
 	}, [])
 
+	// Récupère les données du film
 	const loadMovieData = async () => {
 		await fetch(API_URL_DETAILS)
 			.then(res => res.json())
 			.then(data => {
 				setData(data);
 				setTitle(data.title);
+			});
+	}
+
+	const loadTrailer = async () => {
+		await fetch(API_URL_TRAILER)
+			.then(res => res.json())
+			.then(data => {
 				setTrailer(data.videos.results[0].key);
 			});
 	}
 
 	const [isVisible, setVisible] = useState(false);
 
+	// Récupère les crédits du film
 	const loadMovieCredits = async () => {
 		await fetch(API_URL_CREDITS)
 			.then(res => res.json())
@@ -58,8 +72,6 @@ const Moviedetails = () => {
 				setCredits(credits);
 			});
 	}
-
-
 
 	const YoutubeEmbed = ({ embedId }) => (
 		<div className="video-responsive">
@@ -79,6 +91,7 @@ const Moviedetails = () => {
 		embedId: PropTypes.string.isRequired
 	};
 
+	// On appele notre composant pour créer la carte information du film
 	const createSheet = (media) => {
 		const addListCrud = () => {
 			setVisible(!isVisible);
@@ -100,6 +113,7 @@ const Moviedetails = () => {
 		)
 	}
 
+	// On appelle notre composant pour créer la partie crédit du film
 	const createSheetMovieCredits = (credits) => {
 		if (credits != credits.length) {
 			return (
@@ -119,6 +133,7 @@ const Moviedetails = () => {
 
 	const [crudList, setCrudList] = useState([]);
 
+	// Second useEffect qui récupère le username de l'utilisateur connecté
 	useEffect(() => {
 		Axios.get("http://localhost:3000/login") //1
 			.then((response) => {
@@ -126,6 +141,7 @@ const Moviedetails = () => {
 			})
 	}, [])
 
+	// Permet d'ajouter à la liste de l'utilisateur le film
 	const addMovie = () => {
 		Axios.post("http://localhost:3001/create", {
 			movieId: MOVIEID,

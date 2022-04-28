@@ -6,12 +6,17 @@ import WatchingList from '../components/WatchingList';
 import CompletedList from '../components/CompletedList';
 import PlanningList from '../components/PlanningList';
 
+/*
+	Page profil de l'utilisateur, il peut retrouver sa liste de film/série
+*/
 function Profile() {
+	// On récupère l'id présent dans l'url
 	let { id } = useParams();
 
 	const [username, setUsername] = useState("");
 	const [crudList, setCrudList] = useState([]);
 
+	// Requête vers notre API pour récuperer les informations en fonction de l'id présent dans l'url
 	useEffect(() => {
 		axios.get(`http://localhost:3001/basicInfo/${id}`)
 			.then((response) => {

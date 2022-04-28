@@ -12,6 +12,9 @@ import { IconContext } from 'react-icons/lib';
 
 import '../style/navbar.css'
 
+/*
+	Barre de navigation vertical qui permet d'accéder à la section film ou série
+*/
 function Navbar() {
 	const [userlist, setUserlist] = useState([]);
 

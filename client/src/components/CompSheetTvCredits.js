@@ -1,5 +1,8 @@
 import React from 'react'
 
+/*
+    Les acteurs qui ont participé à la série
+*/
 export default function CompSheetTvCredits(props) {
     return (
         <div key={props.id} id={props.id} className="sheet">

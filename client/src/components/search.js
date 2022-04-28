@@ -3,6 +3,10 @@ import ReactPaginate from 'react-paginate';
 import CardMovie from "./cardMovie"
 import "../style/search.css";
 
+/*
+	La barre de recherche qui va nous permettre de fetch le film
+	indiqué par l'utilisateur.
+*/
 const Search = () => {
 
 	const [movieId, setMovieId] = useState('');
@@ -39,19 +43,19 @@ const Search = () => {
 			fetch(SEARCH_URL),
 			fetch(API_URL)
 		])
-		.then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-		.then(([data1, data2]) => {
-			setData1(data1);
-			setPageCount(data1.total_pages);
-			setIsLoaded(true);
-			setData2(data2);
-			console.log(data2);
-		})
-		.catch(error => console.error('Error', error));
+			.then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+			.then(([data1, data2]) => {
+				setData1(data1);
+				setPageCount(data1.total_pages);
+				setIsLoaded(true);
+				setData2(data2);
+				console.log(data2);
+			})
+			.catch(error => console.error('Error', error));
 	}
 
 	const createCard = (movie) => {
-		if(movie.poster_path == null) {
+		if (movie.poster_path == null) {
 			return (
 				<CardMovie
 					id={movie.id}
@@ -61,7 +65,7 @@ const Search = () => {
 					title={movie.title}
 					score={movie.vote_average}
 					url={'/no_image.png'}
-	
+
 				/>
 			)
 		} else {
@@ -105,7 +109,7 @@ const Search = () => {
 				{(isLoaded && data1.results) ? (
 					//data1.results ? data1.results?.map(movie => (createCard(movie))) : data2.results?.map(movie => (createCard(movie)))
 					data1.results?.map(movie => createCard(movie))
-				) : ( 
+				) : (
 					data2.results?.map(movie => createCard(movie))
 					//<div></div>
 				)
@@ -127,7 +131,7 @@ const Search = () => {
 					/>
 				) : (
 					<div>Nothing to display</div>
-				)} 
+				)}
 			</div>
 		</div>
 	)
