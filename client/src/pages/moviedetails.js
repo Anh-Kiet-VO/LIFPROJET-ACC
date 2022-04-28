@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import Axios from "axios"
 
@@ -17,16 +18,20 @@ const Moviedetails = () => {
 
 	const LANGUAGE = '&language=fr';
 
-	const API_URL_DETAILS = 'https://api.themoviedb.org/3/movie/' + movieId.id + '?' + API_KEY + LANGUAGE;
+	const TRAILER = '&append_to_response=videos'
+
+	const API_URL_DETAILS = 'https://api.themoviedb.org/3/movie/' + movieId.id + '?' + API_KEY + LANGUAGE + TRAILER;
 	const API_URL_CREDITS = 'https://api.themoviedb.org/3/movie/' + movieId.id + '/credits?' + API_KEY + LANGUAGE;
 
 	const [data, setData] = useState([]);
 
 	const [credits, setCredits] = useState([]);
 
-	const [MOVIEID, setMovieId] = useState("")
+	const [MOVIEID, setMovieId] = useState("");
 
-	const [title, setTitle] = useState("")
+	const [title, setTitle] = useState("");
+
+	const [trailer, setTrailer] = useState([]);
 
 	useEffect(() => {
 		loadMovieData();
@@ -40,6 +45,7 @@ const Moviedetails = () => {
 			.then(data => {
 				setData(data);
 				setTitle(data.title);
+				setTrailer(data.videos.results[0].key);
 			});
 	}
 
@@ -53,13 +59,31 @@ const Moviedetails = () => {
 			});
 	}
 
+
+
+	const YoutubeEmbed = ({ embedId }) => (
+		<div className="video-responsive">
+			<iframe
+				width="853"
+				height="480"
+				src={`https://www.youtube.com/embed/${embedId}`}
+				frameBorder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowFullScreen
+				title="Embedded youtube"
+			/>
+		</div>
+	);
+
+	YoutubeEmbed.propTypes = {
+		embedId: PropTypes.string.isRequired
+	};
+
 	const createSheet = (media) => {
 		const addListCrud = () => {
 			setVisible(!isVisible);
 		}
 
-		console.log(media.genres);
-		
 		return (
 			<CompSheet
 				key={media.id}
@@ -76,8 +100,6 @@ const Moviedetails = () => {
 		)
 	}
 
-
-
 	const createSheetMovieCredits = (credits) => {
 		if (credits != credits.length) {
 			return (
@@ -89,13 +111,13 @@ const Moviedetails = () => {
 
 	}
 
-	const [movieStatus, setMovieStatus] = useState("")
-	const [movieProgress, setMovieProgress] = useState(0)
-	const [movieScore, setMovieScore] = useState(0)
+	const [movieStatus, setMovieStatus] = useState("");
+	const [movieProgress, setMovieProgress] = useState(0);
+	const [movieScore, setMovieScore] = useState(0);
 
-	const [username, setUsername] = useState("")
+	const [username, setUsername] = useState("");
 
-	const [crudList, setCrudList] = useState([])
+	const [crudList, setCrudList] = useState([]);
 
 	useEffect(() => {
 		Axios.get("http://localhost:3000/login") //1
@@ -120,6 +142,7 @@ const Moviedetails = () => {
 			{
 				data ? createSheet(data) : null
 			}
+			<YoutubeEmbed embedId={trailer} />
 			{
 				credits ? createSheetMovieCredits(credits) : null
 			}
