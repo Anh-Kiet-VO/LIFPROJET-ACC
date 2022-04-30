@@ -56,14 +56,14 @@ function Navbar() {
 					<Link to='#' className='menu-bars'>
 						<FaIcons.FaBars onClick={showSidebar} />
 					</Link>
-					{localStorage.getItem("token") != null ? userlist.filter(user => user.username == loginUsername)
+					{userlist.filter(user => user.username == loginUsername)
 						.map((val, key) => {
 							return (
 								<div key={key} className="crud-list">
-									<Link to={`/profile/${val.id}`}><CgIcons.CgProfile />texte</Link>
+									<Link to={`/profile/${val.id}`}><CgIcons.CgProfile /></Link>
 								</div>
 							)
-						}) : null}
+						})}
 
 				</div>
 			</div>
