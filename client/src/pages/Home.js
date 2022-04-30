@@ -49,6 +49,7 @@ function Home() {
 			} else {
 				localStorage.setItem("token", response.data.token);
 				setLoginStatus(true);
+				window.location.reload(false);
 			}
 		});
 	};
@@ -64,11 +65,17 @@ function Home() {
 		})
 	}
 
+	const deleteCookie = async () => {
+		document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+	}
+
 	// Déconnecte l'utilisateur en supprimant le token créer suite à la connexion
 	const logout = () => {
 		localStorage.removeItem("token");
+		deleteCookie();
 		window.location.reload(false)
 	}
+
 
 	// Récupère le username si l'utilisateur est connecté
 	useEffect(() => {

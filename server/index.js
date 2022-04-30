@@ -11,10 +11,12 @@ const saltRounds = 10;
 
 const jwt = require("jsonwebtoken");
 
-const fetch = require('node-fetch');
-
 const app = express();
 
+/*
+	Les méthodes utilisé afin de ne pas avoir de problème CORS
+	et lorsqu'on envoie des requêtes
+*/
 app.use(express.json());
 app.use(cors({
 	origin: ["http://localhost:3000"],
@@ -24,6 +26,9 @@ app.use(cors({
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/*
+	On créer une session avec cookie expiration de 1jours
+*/
 app.use(session({
 	key: "userId",
 	secret: "cecilia",
@@ -31,11 +36,14 @@ app.use(session({
 	saveUninitialized: false,
 	cookie: {
 		maxAge: 99999999,
-		httpOnly: true,
+		httpOnly: false,
 	},
 })
 );
 
+/*
+	Connection de notre BDD local
+*/
 const db = mysql.createConnection({
 	user: "root",
 	host: "localhost",
@@ -43,6 +51,11 @@ const db = mysql.createConnection({
 	database: "lifprojet",
 });
 
+/*
+	Récupère les informations transmis pour enregister
+	un nouvel utilisateur dans la BDD
+	et insère dans la table users.
+*/
 app.post('/register', (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
@@ -61,6 +74,9 @@ app.post('/register', (req, res) => {
 	})
 });
 
+/*
+	Vérifie si l'utilisateur possède un token
+*/
 const verifiyJWT = (req, res, next) => {
 	const token = req.headers["x-access-token"]
 
@@ -82,6 +98,9 @@ app.get("/isUserAuth", verifiyJWT, (req, res) => {
 	res.send("Bien connecté")
 })
 
+/*
+	Permet de verifier si l'utilisateur est bien connecté
+*/
 app.get("/login", (req, res) => {
 	if (req.session.user) {
 		console.log("existe");
@@ -92,6 +111,12 @@ app.get("/login", (req, res) => {
 	}
 })
 
+/*
+	Si on reçoit une demande de login on vérifie si l'utilisateur
+	existe dans la BDD et on compare les mots de passe
+	Si les informations correspondent, on crée un token accessible
+	dans localStorage
+*/
 app.post('/login', (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
@@ -125,6 +150,11 @@ app.post('/login', (req, res) => {
 	);
 });
 
+/*
+	Si on reçoit un post on récupère les informations reçus du front-end
+	et on envoie une requête à la BDD afin d'insérer cette nouvelle donnée
+	dans notre table watchlist
+*/
 app.post('/create', (req, res) => {
 	const movieId = req.body.movieId;
 	const title = req.body.title;
@@ -146,6 +176,9 @@ app.post('/create', (req, res) => {
 	);
 })
 
+/*
+	Récupère toutes les informations de la table users en fonction de l'id passé en paramètre
+*/
 app.get('/basicInfo/:id', (req, res) => {
 	const id = req.params.id;
 	db.query(
@@ -161,6 +194,7 @@ app.get('/basicInfo/:id', (req, res) => {
 	);
 })
 
+// On récupère tous les id des utilisateurs enregistré sur le site
 app.get('/getAllId', (req, res) => {
 	db.query(
 		'SELECT id, username FROM users',
@@ -174,6 +208,9 @@ app.get('/getAllId', (req, res) => {
 	);
 })
 
+/*
+	On récupère la liste de film/série en fonction de l'utilisateur reçu en paramètre
+*/
 app.get('/movieList/:username', (req, res) => {
 	const username = req.params.username;
 	db.query(
@@ -189,25 +226,9 @@ app.get('/movieList/:username', (req, res) => {
 	);
 })
 
-// app.delete('/delete', (req, res) => {
-// 	const movieId = req.body.movieId;
-// 	const status = req.body.status;
-// 	const score = req.body.score;
-// 	const progress = req.body.progress;
-// 	const userId = req.body.userId;
-// 	db.query(
-// 		'DELETE FROM watchlist WHERE movieId = ? AND status = ? AND score = ? AND progress = ? AND userId = ?',
-// 		[movieId, status, score, progress, userId],
-// 		(err, result) => {
-// 			if (err) {
-// 				console.log(err);
-// 			} else {
-// 				res.send("Valeur supprimé");
-// 			}
-// 		}
-// 	)
-// })
-
+/*
+	On delete un film/série en fonction de l'id reçu en paramètre
+*/
 app.delete('/delete/:movieId', (req, res) => {
 	const movieId = req.params.movieId;
 	db.query(
@@ -223,6 +244,10 @@ app.delete('/delete/:movieId', (req, res) => {
 	)
 })
 
+/*
+	Si on reçoit un put /update du front on va mettre à jours les informations
+	du film/série en question et en fonction de l'utilisateur qui a fait cette demande
+*/
 app.put('/update', (req, res) => {
 	const movieId = req.body.movieId;
 	const status = req.body.status;
@@ -246,6 +271,7 @@ app.put('/update', (req, res) => {
 	)
 })
 
+// Si on reçoit un get /showList du front on va selectionner toute la liste des films
 app.get('/showList', (req, res) => {
 	db.query(
 		"SELECT * FROM watchlist",
@@ -259,7 +285,7 @@ app.get('/showList', (req, res) => {
 	);
 })
 
-
+// Le port que express va écouter, c'est le port de notre serveur API
 app.listen(3001, () => {
 	console.log("Server running on port 3001");
 });
