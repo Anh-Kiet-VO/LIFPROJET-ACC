@@ -285,6 +285,12 @@ app.get('/showList', (req, res) => {
 	);
 })
 
+// Dès que l'utilisateur  se déconnecte on supprime notre cookie userId
+app.get('/delete-cookie', (req, res) => {
+	res.clearCookie('userId');
+	res.send("Cookie supprimé, deconnexion");
+});
+
 // Le port que express va écouter, c'est le port de notre serveur API
 app.listen(3001, () => {
 	console.log("Server running on port 3001");

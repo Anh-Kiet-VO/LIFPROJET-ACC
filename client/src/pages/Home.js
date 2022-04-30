@@ -65,15 +65,17 @@ function Home() {
 		})
 	}
 
+	/* On supprime le cookie en le faisant expirer
 	const deleteCookie = async () => {
 		document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-	}
+	}*/
 
 	// Déconnecte l'utilisateur en supprimant le token créer suite à la connexion
+	// et supprime le cookie en faisant une requête à notre serveur
 	const logout = () => {
 		localStorage.removeItem("token");
-		deleteCookie();
-		window.location.reload(false)
+		Axios.get('/delete-cookie')
+			.then(window.location.reload(false));
 	}
 
 
