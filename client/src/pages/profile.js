@@ -6,6 +6,8 @@ import WatchingList from '../components/WatchingList';
 import CompletedList from '../components/CompletedList';
 import PlanningList from '../components/PlanningList';
 
+import '../style/profile.css';
+
 /*
 	Page profil de l'utilisateur, il peut retrouver sa liste de film/série
 */
@@ -31,19 +33,19 @@ function Profile() {
 
 
 	return (
-		<div>
-			<h1>Bienvenue {username}</h1>
-			<h1>En train de regarder :</h1>
+		<div className="profile-page">
+			<h1>Bienvenue {username} !</h1>
+			<h2>En train de regarder</h2>
 			<WatchingList
 				crudList={crudList}
 			/>
 
-			<h1>Complété : </h1>
+			<h2>Complétés</h2>
 			<CompletedList
 				crudList={crudList}
 			/>
 
-			<h1>Prévu de regarder : </h1>
+			<h2>Prévu de regarder</h2>
 			<PlanningList
 				crudList={crudList}
 			/>

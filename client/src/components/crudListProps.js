@@ -56,7 +56,7 @@ export default function CrudListProps(props) {
 				<button onClick={props.addMovie} type='submit'>Envoyer</button>
 			</form>
 
-			<div className={isVisible ? null : 'hidden'}><p>Film bien ajouté à votre liste !</p></div>
+			<div className={isVisible ? null : 'hidden'}><p>Média bien ajouté à votre liste !</p></div>
 		</div>
 	);
 }

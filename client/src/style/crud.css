@@ -3,6 +3,17 @@
     margin: 0 auto 50px auto;
 }
 
+.edit {
+    margin-top: 50px;
+}
+
+.edit h2 {
+    margin: 0 0 40px 0;
+    background: var(--color-1);
+    display: inline-block;
+    padding: 0 10px;
+}
+
 .crud-modal form {
     display: flex;
     justify-content: space-between;

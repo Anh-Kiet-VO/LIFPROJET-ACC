@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 
+import '../style/crud.css';
+
 /*
 	Page pour éditer le film/série que nous avons dans la liste
 */
@@ -48,46 +50,44 @@ function Edit() {
 	}
 
 	return (
-		<div>
-			{
-				<div className="salutCecilia">
-					<form onSubmit={editMovie}>
-						<h1>Status</h1>
-						<select onChange={(e) => handleChange(e)}>
-							<option value="">Status</option>
-							<option value="Completed">Fini</option>
-							<option value="Watching">En train de regarder</option>
-							<option value="Planning">A regarder</option>
-						</select>
-
-						<h1>Progession</h1>
-						<input
-							type="number"
-							placeholder="Progession"
-							onChange={(e) => {
-								setnewMovieProgress(e.target.value);
-							}}
-						/>
-
-						<h1>Note</h1>
-						<input
-							type="number"
-							placeholder=".../10"
-							onChange={(e) => {
-								setnewMovieScore(e.target.value);
-							}}
-						/>
-						<button type='submit'>Editer</button>
-					</form>
-					<div className={isVisible ? null : 'hidden'}><p>Données bien modifiés !</p></div>
+		<div className="crud-modal edit">
+			<h2>Editer</h2>
+			<form onSubmit={editMovie}>
+				<div>
+				<h3>Statut</h3>
+				<select onChange={(e) => handleChange(e)}>
+					<option value="">Status</option>
+					<option value="Completed">Fini</option>
+					<option value="Watching">En train de regarder</option>
+					<option value="Planning">A regarder</option>
+				</select>
 				</div>
 
-
-
-			}
+				<div>
+				<h3>Progession</h3>
+				<input
+					type="number"
+					placeholder="Progession"
+					onChange={(e) => {
+						setnewMovieProgress(e.target.value);
+					}}
+				/>
+				</div>
+				
+				<div>
+				<h3>Note</h3>
+				<input
+					type="number"
+					placeholder=".../10"
+					onChange={(e) => {
+						setnewMovieScore(e.target.value);
+					}}
+				/>
+				</div>
+				<button type='submit'>Editer</button>
+			</form>
+			<div className={isVisible ? null : 'hidden'}><p>Données bien modifiés !</p></div>
 		</div>
-
-
 	)
 }
 

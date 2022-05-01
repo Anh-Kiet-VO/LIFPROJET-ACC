@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import Axios from 'axios';
+
+import { IconContext } from 'react-icons/lib';
 import * as Fa from "react-icons/fa";
 import * as Ai from "react-icons/ai";
 
-import '../style/cursor.css'
+import '../style/profile.css';
 
 /*
 	Section des films/séries complété par l'utilisateur
@@ -36,11 +38,13 @@ export default function CompletedList(props) {
 					.map((val, key) => {
 						return (
 							<div key={key} className="crud-list">
-								<h1>{val.title}</h1>
-								<h1>Note : {val.score} /10</h1>
-								<h1> Progression : {val.progress}</h1>
-								{val.userId == username ? <Link to={`/edit/${val.movieId}`}><Fa.FaEdit size={30} /></Link> : null}
-								{val.userId == username ? <div className='cursor-delete'><Ai.AiFillDelete size={30} onClick={() => { deleteMovie(val.movieId) }} /></div> : null}
+								<h4>{val.title}</h4>
+								<p>Note : {val.score} /10</p>
+								<p> Progression : {val.progress}</p>
+								<IconContext.Provider value={{ className: 'icon' }}>
+								{val.userId == username ? <Link to={`/edit/${val.movieId}`}><Fa.FaEdit /></Link> : null}
+								{val.userId == username ? <div className='cursor-delete'><Ai.AiFillDelete onClick={() => { deleteMovie(val.movieId) }} /></div> : null}
+								</IconContext.Provider>
 							</div>
 						)
 					})
