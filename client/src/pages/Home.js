@@ -8,6 +8,9 @@ import Login from '../components/login'
 
 import "../style/home.css";
 
+import { IconContext } from 'react-icons/lib';
+import * as Vsc from 'react-icons/vsc';
+
 /*
 	Accueil du site, il ne sert qu'à gérer l'authentification
 */
@@ -20,11 +23,8 @@ function Home() {
 
 	const [loginStatus, setLoginStatus] = useState(false);
 
-	const [isActive, setActive] = useState("false");
-
-	const displayRegister = () => {
-		setActive(!isActive);
-	};
+	const [openLogin, setOpenLogin] = useState(false);
+	const [openRegister, setOpenRegister] = useState(false);
 
 	Axios.defaults.withCredentials = true;
 
@@ -89,17 +89,38 @@ function Home() {
 			})
 	})
 
+	// Permet d'afficher l'onglet de connexion
+	const openLoginHandler = () => {
+		var active = document.getElementsByClassName('is-active')[0];
+		if(active) active.classList.remove('is-active');
+		document.activeElement.classList.add('is-active');
+		setOpenLogin(true);
+		setOpenRegister(false);
+	}
+
+	// Permet d'afficher l'onglet d'inscription
+	const openRegisterHandler = () => {
+		var active = document.getElementsByClassName('is-active')[0];
+		if(active) active.classList.remove('is-active');
+		document.activeElement.classList.add('is-active');
+		setOpenRegister(true);
+		setOpenLogin(false);
+	}
+
+	// Permet de fermer l'onlet en cours
+	const close = () => {
+		setOpenLogin(false);
+		setOpenRegister(false);
+		document.getElementsByClassName('is-active')[0].classList.remove('is-active');
+	}
+
 	return (
 		<div className="home">
-			{
-				localStorage.getItem("token") == null ? (
+			{openLogin && (
+				<IconContext.Provider value={{ color: 'white' }}>
+				<div className="login">
+					<button className="btn-close" onClick={() => { close(); }}><Vsc.VscChromeClose /></button>
 					<>
-						<Register
-							setUsernameReg={setUsernameReg}
-							setPasswordReg={setPasswordReg}
-							register={register}
-						/>
-
 						<Login
 							setUsername={setUsername}
 							setPassword={setPassword}
@@ -108,10 +129,46 @@ function Home() {
 							userAuthenticated={userAuthenticated}
 						/>
 					</>
-				) : (
-					<button onClick={logout}>Logout</button>
-				)
+				</div>
+				</IconContext.Provider>
+			)
 			}
+			{openRegister && (
+				<IconContext.Provider value={{ className: 'icon' }}>
+				<div className="register">
+					<button className="btn-close" onClick={() => { close(); }}><Vsc.VscChromeClose /></button>
+					<>
+						<Register
+							setUsernameReg={setUsernameReg}
+							setPasswordReg={setPasswordReg}
+							register={register}
+						/>
+					</>
+				</div>
+				</IconContext.Provider>
+			)
+			}
+			{!openLogin && !openRegister && (
+				<div className="intro">
+					<h1>AC</h1>
+					<p>Le site qui vous permet d'être à jour sur tous vos films et vos séries préférées. Laissez-vous guider et séduire par le plus grand catalogue jamais proposé !</p>
+				</div>
+			)
+			}
+			
+			<div className="buttons">
+				{
+					localStorage.getItem("token") == null ? (
+						<>
+							<button onClick={() => { openLoginHandler(); }}>Connexion</button>
+							<button className="btn-rg" onClick={() => { openRegisterHandler(); }}>Inscription</button>
+						</>
+					) : (
+						<button onClick={logout}>Se déconnecter</button>
+					)
+				}
+			</div>
+			<div className="bg-home"></div>
 		</div>
 	);
 }

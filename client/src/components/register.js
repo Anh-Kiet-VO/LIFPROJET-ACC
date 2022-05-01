@@ -5,34 +5,26 @@ import { useState } from 'react';
 	Permet à l'utilisateur de s'enregistrer
 */
 export default function Register(props) {
-	const [isActive, setActive] = useState("false");
-
-	const displayRegister = () => {
-		setActive(!isActive);
-	};
-
 	return (
-		<div className="registration">
-			<div className={isActive ? "hidden" : ""} id="register-modal">
-				<h1>Registration</h1>
-				<label>Username</label>
+		<div className="inner">
+				<h2>Inscription</h2>
+				<label>Pseudo</label>
 				<input
 					type="text"
+					placeholder="Pseudo"
 					onChange={(e) => {
 						props.setUsernameReg(e.target.value);
 					}}
 				/>
-				<label>Password</label>
+				<label>Mot de passe</label>
 				<input
 					type="password"
+					placeholder="Mot de passe"
 					onChange={(e) => {
 						props.setPasswordReg(e.target.value);
 					}}
 				/>
-				<button onClick={props.register}>Register</button>
-			</div>
-
-			<button onClick={displayRegister}>S'inscrire</button>
+				<button className="btn-cf" onClick={props.register}>S'inscrire</button>
 		</div>
 	);
 }
