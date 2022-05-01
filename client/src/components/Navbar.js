@@ -59,7 +59,7 @@ function Navbar() {
 					{userlist.filter(user => user.username == loginUsername)
 						.map((val, key) => {
 							return (
-								<div key={key} className="crud-list">
+								<div key={key} className="profile">
 									<Link to={`/profile/${val.id}`}><CgIcons.CgProfile /></Link>
 								</div>
 							)

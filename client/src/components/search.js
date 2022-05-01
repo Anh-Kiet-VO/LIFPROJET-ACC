@@ -11,8 +11,7 @@ const Search = () => {
 
 	const [movieId, setMovieId] = useState('');
 
-	const [data1, setData1] = useState([]);
-	const [data2, setData2] = useState([]);
+	const [data, setData] = useState([]);
 
 	const [search, setSearch] = useState(".");
 
@@ -20,10 +19,9 @@ const Search = () => {
 	const IMG_URL_POSTER = 'https://image.tmdb.org/t/p/w500';
 	const LANGUAGE = '&language=fr';
 
-	const [hits, setHits] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [pageCount, setPageCount] = useState(1);
-	const [currentPage, setcurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const BASE_URL = "https://api.themoviedb.org/3";
 	const SEARCH_URL = BASE_URL + '/search/movie?' + API_KEY + `&query=${search}` + `&page=${currentPage}` + LANGUAGE;
@@ -39,19 +37,13 @@ const Search = () => {
 	}, [search])
 
 	const loadMovieData = async () => {
-		Promise.all([
-			fetch(SEARCH_URL),
-			fetch(API_URL)
-		])
-			.then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-			.then(([data1, data2]) => {
-				setData1(data1);
-				setPageCount(data1.total_pages);
+		await fetch(SEARCH_URL)
+			.then(res => res.json())
+			.then(data => {
+				setData(data);
+				setPageCount(Math.ceil(data.total_pages));
 				setIsLoaded(true);
-				setData2(data2);
-				console.log(data2);
-			})
-			.catch(error => console.error('Error', error));
+			});
 	}
 
 	const createCard = (movie) => {
@@ -84,8 +76,8 @@ const Search = () => {
 	}
 
 	const handlePageChange = (selectedObject) => {
-		console.log(selectedObject);
-		setcurrentPage(selectedObject.selected + 1);
+		console.log(selectedObject.selected);
+		setCurrentPage(selectedObject.selected);
 		loadMovieData();
 	};
 
@@ -106,19 +98,17 @@ const Search = () => {
 			</div>
 
 			<div className="search-result">
-				{(isLoaded && data1.results) ? (
-					//data1.results ? data1.results?.map(movie => (createCard(movie))) : data2.results?.map(movie => (createCard(movie)))
-					data1.results?.map(movie => createCard(movie))
+				{isLoaded ? (
+					data.results?.map(movie => createCard(movie))
 				) : (
-					data2.results?.map(movie => createCard(movie))
-					//<div></div>
+					<div>Vous pouvez faire votre recherche...</div>
 				)
 				}
 
 				{isLoaded ? (
 					<ReactPaginate
 						pageCount={pageCount}
-						pageRange={2}
+						pageRange={1}
 						marginPagesDisplayed={2}
 						onPageChange={handlePageChange}
 						containerClassName={'container'}
@@ -130,8 +120,11 @@ const Search = () => {
 						activeClassName={'active'}
 					/>
 				) : (
-					<div>Nothing to display</div>
+					<div></div>
 				)}
+			</div>
+			<div className="pagination">
+				
 			</div>
 		</div>
 	)

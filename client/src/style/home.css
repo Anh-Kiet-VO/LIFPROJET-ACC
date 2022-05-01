@@ -68,7 +68,7 @@
   z-index: 99;
 }
 
-.buttons button:hover, .is-active {
+.buttons button:hover, .buttons .is-active {
   background: var(--color-2)!important;
   color: var(--color-dark)!important;
 }
