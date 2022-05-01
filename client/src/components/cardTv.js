@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function CardTv(props) {
     return (
-        <div key={props.id} id={props.id} className='movie-link' onClick={props.getMovieInfo}>
+        <div key={props.id} id={props.id} className='movie-link' onClick={props.getSerieInfo}>
             <Link to={`/detailTv/${props.id}`}>
                 <div className="media-img">
                     <img src={props.url} alt={props.title} />

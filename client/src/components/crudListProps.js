@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+
+import '../style/crud.css';
 
 /*
 	Permet à l'utilisateur d'ajouter un film/série à sa liste
@@ -20,14 +22,16 @@ export default function CrudListProps(props) {
 	return (
 		<div className={classes}>
 			<form onSubmit={addMovie}>
-				<h1>Statut</h1>
+				<div>
+				<h3>Statut</h3>
 				<select onChange={(e) => handleChange(e)}>
-					<option value="">Status</option>
 					<option value="Completed">Fini</option>
 					<option value="Watching">En train de regarder</option>
 					<option value="Planning">A regarder</option>
 				</select>
-				<h1>Progression</h1>
+				</div>
+				<div>
+				<h3>Progression</h3>
 				<input
 					type="number"
 					placeholder=""
@@ -35,7 +39,9 @@ export default function CrudListProps(props) {
 						props.setMovieProgress(e.target.value);
 					}}
 				/>
-				<h1>Note</h1>
+				</div>
+				<div>
+				<h3>Note</h3>
 				<input
 					type="number"
 					placeholder="../10"
@@ -45,6 +51,7 @@ export default function CrudListProps(props) {
 						props.setMovieScore(e.target.value);
 					}}
 				/>
+				</div>
 
 				<button onClick={props.addMovie} type='submit'>Envoyer</button>
 			</form>

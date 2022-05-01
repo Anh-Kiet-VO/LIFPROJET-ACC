@@ -158,7 +158,9 @@ const Moviedetails = () => {
 			{
 				data ? createSheet(data) : null
 			}
-			<YoutubeEmbed embedId={trailer} />
+			<div className="video">
+                <YoutubeEmbed embedId={trailer} />
+            </div>
 			{
 				credits ? createSheetMovieCredits(credits) : null
 			}

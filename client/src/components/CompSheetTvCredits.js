@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react';
+
+import { IconContext } from 'react-icons/lib';
+import * as Gi from "react-icons/gi";
 
 /*
     Les acteurs qui ont participé à la série
 */
 export default function CompSheetTvCredits(props) {
     return (
-        <div key={props.id} id={props.id} className="sheet">
-            <div className="card-text">
+        <IconContext.Provider value={{ className: 'icon-star' }}>
+            <div className="sheet-credits">
+                <h1><Gi.GiPolarStar /> Casting</h1>
                 {
-                    props.cast.map((val, key) => {
+                    props.cast.slice(0, 9).map((val, key) => {
                         return (
-                            <div className='credits' key={key} id={val.key}>
-                                <div className="sheet-img"><img src={"https://image.tmdb.org/t/p/w185" + val.profile_path} alt={val.name} /></div>
-                                {val.name}
+                            <div className="credits" key={key} id={val.key}>
+                                <div className="sheet-credits-img"><img src={"https://image.tmdb.org/t/p/w185" + val.profile_path} alt={val.name} /></div>
+                                <p>{val.name}</p>
                             </div>
                         )
                     })
                 }
             </div>
-        </div>
+        </IconContext.Provider>
     );
 }

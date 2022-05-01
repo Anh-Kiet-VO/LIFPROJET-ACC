@@ -1,0 +1,30 @@
+.crud-modal {
+    width: 60%;
+    margin: 0 auto 50px auto;
+}
+
+.crud-modal form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.crud-modal h3 {
+    margin: 0;
+}
+
+.crud-modal select, .crud-modal input {
+    border-radius: 3px;
+    border: none;
+    padding: 10px;
+    font-family: var(--font-1);
+}
+
+.crud-modal button[type=submit] {
+    background: var(--color-very-dark);
+    color: var(--color-light);
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-family: var(--font-1);
+}

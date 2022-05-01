@@ -9,6 +9,7 @@ import CompSheetTvCredits from "../components/CompSheetTvCredits";
 import CrudListProps from '../components/crudListProps';
 
 import '../App.css';
+import '../Sheet.css';
 
 /*
     Page permettant d'avoir les détails d'une série
@@ -30,9 +31,9 @@ const TVdetails = () => {
 
     const [credits, setCredits] = useState([]);
 
-    const [MOVIEID, setMovieId] = useState("")
+    const [MOVIEID, setMovieId] = useState("");
 
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState("");
 
     const [trailer, setTrailer] = useState([]);
 
@@ -153,16 +154,11 @@ const TVdetails = () => {
 
 
     return (
-        <div className="Sheet">
+        <div className="sheet-page">
             {
                 data ? createSheet(data) : null
 
             }
-            <YoutubeEmbed embedId={trailer} />
-            {
-                credits ? createTvCredits(credits) : null
-            }
-
             <CrudListProps
                 setMovieStatus={setMovieStatus}
                 setMovieProgress={setMovieProgress}
@@ -171,6 +167,12 @@ const TVdetails = () => {
                 crudList={crudList}
                 username={username}
             />
+            <div className="video">
+                <YoutubeEmbed embedId={trailer} />
+            </div>
+            {
+                credits ? createTvCredits(credits) : null
+            }
         </div>
     );
 }
