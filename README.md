@@ -62,7 +62,8 @@ npm install
 npm run start
 ```
 
-Vous pouvez utiliser les comptes déjà utilisé : 
+Vous pouvez utiliser les comptes déjà utilisé :  
+ 
 Pseudo : Cecilia
 Mot de passe : bao
 
