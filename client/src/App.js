@@ -13,6 +13,10 @@ import Profile from "./pages/profile";
 import Edit from "./pages/edit";
 import UserList from "./pages/userlist";
 
+/*
+	On initialise les routes ici.
+	Pour chaque chemin on va afficher des pages différentes
+*/
 function App() {
 
 	return (
