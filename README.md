@@ -62,6 +62,13 @@ npm install
 npm run start
 ```
 
+Vous pouvez utiliser les comptes déjà utilisé : 
+Pseudo : Cecilia
+Mot de passe : bao
+
+Pseudo : ak
+Mot de passe : ak
+
 Pour la BDD :
 [voir tutoriel](https://github.com/Anh-Kiet-VO/LIFPROJET-ACC/blob/master/Installation_backend.md)
 -----------------
