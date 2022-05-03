@@ -103,11 +103,9 @@ app.get("/isUserAuth", verifiyJWT, (req, res) => {
 */
 app.get("/login", (req, res) => {
 	if (req.session.user) {
-		console.log("existe");
 		res.send({ loggedIn: true, user: req.session.user })
 	} else {
 		res.send({ loggedIn: false })
-		console.log("user en loggedIn false : " + req.session.user);
 	}
 })
 
@@ -136,7 +134,6 @@ app.post('/login', (req, res) => {
 							expiresIn: 300,
 						})
 						req.session.user = result;
-						console.log(req.session.user)
 
 						res.json({ auth: true, token: token, result: result });
 					} else {
@@ -235,7 +232,6 @@ app.delete('/delete/:movieId', (req, res) => {
 		'DELETE FROM watchlist WHERE movieId = ?', [movieId],
 		(err, result) => {
 			if (err) {
-				console.log("Film non supprimé");
 				console.log(err);
 			} else {
 				res.send("Valeur supprimé");
@@ -255,17 +251,13 @@ app.put('/update', (req, res) => {
 	const progress = req.body.progress;
 	const userId = req.body.userId;
 
-	console.log(userId);
-
 	db.query(
 		'UPDATE watchlist SET score = ?, status = ?, progress = ? WHERE movieId = ? AND userId= ?', [score, status, progress, movieId, userId],
 		(err, result) => {
 			if (err) {
-				console.log("Information non changé");
 				console.log(err);
 			} else {
 				res.send("Valeur modifié");
-				console.log(result)
 			}
 		}
 	)
