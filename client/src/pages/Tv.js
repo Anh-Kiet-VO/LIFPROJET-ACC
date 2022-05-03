@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import ReactPaginate from 'react-paginate';
 import { useNavigate } from "react-router-dom";
 
-import Axios from "axios";
 import SearchTv from "../components/searchTv";
 import CardTv from "../components/cardTv";
 
@@ -89,7 +88,7 @@ function Tv() {
 
 	const togglePopular = () => {
 		var active = document.getElementsByClassName('is-active')[0];
-		if(active) active.classList.remove('is-active');
+		if (active) active.classList.remove('is-active');
 		document.activeElement.classList.add('is-active');
 		setPopular(true);
 		setSearch(false);
@@ -97,7 +96,7 @@ function Tv() {
 
 	const toggleSearch = () => {
 		var active = document.getElementsByClassName('is-active')[0];
-		if(active) active.classList.remove('is-active');
+		if (active) active.classList.remove('is-active');
 		document.activeElement.classList.add('is-active');
 		setPopular(false);
 		setSearch(true);
