@@ -14,7 +14,7 @@ Après démarrage de la BDD installez le [script](https://github.com/Anh-Kiet-VO
 
 Puis importez le script dans votre phpmyadmin 
 
-![Image PhpMyAdmin](https://cdn.discordapp.com/attachments/680775708997451791/968081555463479296/unknown.png)
+![Image PhpMyAdmin](https://i.imgur.com/M7Jqave.jpg)
 
 ---
 ## Démarrer notre API :
