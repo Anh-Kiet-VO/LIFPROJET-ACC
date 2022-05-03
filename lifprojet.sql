@@ -67,7 +67,11 @@ INSERT INTO `watchlist` (`id`, `movieId`, `title`, `status`, `score`, `progress`
 (27, 31724, 'Code Geass: Lelouch of the Rebellion', 'Completed', 7, 50, 'ak'),
 (35, 634649, 'Spider-Man : No Way Home', 'Completed', 5, 10, 'ak'),
 (38, 324857, 'Spider-Man : New Generation', 'Watching', 2, 0, 'ak'),
-(39, 44217, 'Vikings', 'Watching', 2, 15, 'ak');
+(39, 44217, 'Vikings', 'Watching', 2, 15, 'ak'),
+(41, 92749, 'Moon Knight', 'Watching', 8, 7, 'Cecilia'),
+(42, 52814, 'Halo', 'Watching', 6, 8, 'Cecilia'),
+(44, 60863, 'Haikyu!!', 'Completed', 10, 14, 'Cecilia'),
+(45, 2316, 'The Office', 'Planning', 0, 0, 'Cecilia');
 
 --
 -- Index pour les tables déchargées
