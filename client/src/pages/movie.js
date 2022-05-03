@@ -3,8 +3,8 @@ import ReactPaginate from 'react-paginate';
 import { useNavigate } from "react-router-dom";
 
 import Axios from "axios";
-import Search from "../components/search";
-import CardMovie from "../components/cardMovie";
+import Search from "../components/SearchMovie";
+import CardMovie from "../components/CardMovie";
 
 import "../style/media.css";
 
@@ -58,6 +58,8 @@ function Movie() {
 			});
 	}
 
+	// La petite vignette avec l'affiche, le titre et la note
+	// S'il n'y a pas d'image alors on met un placeholder à la place
 	const createCard = (movie) => {
 		if (movie.poster_path == null) {
 			return (
@@ -87,6 +89,7 @@ function Movie() {
 		}
 	}
 
+	// Basculer sur la section Films tendances
 	const togglePopular = () => {
 		var active = document.getElementsByClassName('is-active')[0];
 		if(active) active.classList.remove('is-active');
@@ -95,6 +98,7 @@ function Movie() {
 		setSearch(false);
 	}
 
+	// Basculer sur la barre de recherche
 	const toggleSearch = () => {
 		var active = document.getElementsByClassName('is-active')[0];
 		if(active) active.classList.remove('is-active');
@@ -102,12 +106,6 @@ function Movie() {
 		setPopular(false);
 		setSearch(true);
 	}
-
-	const handlePageChange = (selectedObject) => {
-		console.log(selectedObject.selected);
-		setcurrentPage(selectedObject.selected + 1);
-		loadMovieData();
-	};
 
 	return (
 		<div className="media-display">
@@ -122,27 +120,10 @@ function Movie() {
 				))
 			)
 			}
-			{popular && isLoaded && (
-				(<ReactPaginate
-					pageCount={pageCount}
-					pageRange={2}
-					marginPagesDisplayed={2}
-					onPageChange={handlePageChange}
-					containerClassName={'container'}
-					previousLinkClassName={'page'}
-					breakClassName={'page'}
-					nextLinkClassName={'page'}
-					pageClassName={'page'}
-					disabledClassNae={'disabled'}
-					activeClassName={'active'}
-					forcePage={currentPage}
-				/>)
-			)
-			}
 
 			{search && (
 				<Search />
-			)
+				)
 			}
 
 		</div>
@@ -151,5 +132,3 @@ function Movie() {
 }
 
 export default Movie;
-
-/* <Search /> */

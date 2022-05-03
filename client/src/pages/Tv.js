@@ -3,8 +3,8 @@ import ReactPaginate from 'react-paginate';
 import { useNavigate } from "react-router-dom";
 
 import Axios from "axios";
-import SearchTv from "../components/searchTv";
-import CardTv from "../components/cardTv";
+import SearchTv from "../components/SearchTv";
+import CardTv from "../components/CardTv";
 
 import "../style/media.css";
 
@@ -58,6 +58,8 @@ function Tv() {
 			});
 	}
 
+	// La petite vignette avec l'affiche, le titre et la note
+	// S'il n'y a pas d'image alors on met un placeholder à la place
 	const createCard = (serie) => {
 		if (serie.poster_path == null) {
 			return (
@@ -87,6 +89,7 @@ function Tv() {
 		}
 	}
 
+	// Basculer sur la section Séries tendances
 	const togglePopular = () => {
 		var active = document.getElementsByClassName('is-active')[0];
 		if(active) active.classList.remove('is-active');
@@ -95,6 +98,7 @@ function Tv() {
 		setSearch(false);
 	}
 
+	// Basculer sur la barre de recherche
 	const toggleSearch = () => {
 		var active = document.getElementsByClassName('is-active')[0];
 		if(active) active.classList.remove('is-active');
@@ -102,12 +106,6 @@ function Tv() {
 		setPopular(false);
 		setSearch(true);
 	}
-
-	const handlePageChange = (selectedObject) => {
-		console.log(selectedObject.selected);
-		setcurrentPage(selectedObject.selected + 1);
-		loadMovieData();
-	};
 
 	return (
 		<div className="media-display">
@@ -120,23 +118,6 @@ function Tv() {
 				data.results?.map(serie => (
 					createCard(serie)
 				))
-			)
-			}
-			{popular && isLoaded && (
-				(<ReactPaginate
-					pageCount={pageCount}
-					pageRange={2}
-					marginPagesDisplayed={2}
-					onPageChange={handlePageChange}
-					containerClassName={'container'}
-					previousLinkClassName={'page'}
-					breakClassName={'page'}
-					nextLinkClassName={'page'}
-					pageClassName={'page'}
-					disabledClassNae={'disabled'}
-					activeClassName={'active'}
-					forcePage={currentPage}
-				/>)
 			)
 			}
 

@@ -42,7 +42,7 @@ app.use(session({
 );
 
 /*
-	Connection de notre BDD local
+	Connexion de notre BDD local
 */
 const db = mysql.createConnection({
 	user: "root",
@@ -71,6 +71,7 @@ app.post('/register', (req, res) => {
 				console.log(err);
 			}
 		);
+		res.send("Vous êtes bien enregistré !");
 	})
 });
 

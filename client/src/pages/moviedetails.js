@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 
 import Axios from "axios"
 
-import CompSheet from '../components/CompSheet';
+import CompSheetMovie from '../components/CompSheetMovie';
 import CompSheetMovieCredits from "../components/CompSheetMovieCredits";
-import CrudListProps from '../components/crudListProps';
+import CrudListProps from '../components/CrudListProps';
 
 import '../App.css';
-import '../Sheet.css';
+import '../style/sheet.css';
 
 /*
 	Page permettant d'avoir les détails d'un film
@@ -54,6 +54,7 @@ const Moviedetails = () => {
 			});
 	}
 
+	// Récupère le trailer du film
 	const loadTrailer = async () => {
 		await fetch(API_URL_TRAILER)
 			.then(res => res.json())
@@ -73,6 +74,7 @@ const Moviedetails = () => {
 			});
 	}
 
+	// Le code du trailer à afficher
 	const YoutubeEmbed = ({ embedId }) => (
 		<div className="video-responsive">
 			<iframe
@@ -91,20 +93,20 @@ const Moviedetails = () => {
 		embedId: PropTypes.string.isRequired
 	};
 
-	// On appele notre composant pour créer la carte information du film
+	// On appelle notre composant pour créer la carte information du film
 	const createSheet = (media) => {
 		const addListCrud = () => {
 			setVisible(!isVisible);
 		}
 
 		return (
-			<CompSheet
+			<CompSheetMovie
 				key={media.id}
 				id={media.id}
 				title={media.title}
 				description={media.overview}
 				date={media.release_date}
-				genres={media.genre_ids}
+				genres={media.genres_ids}
 				runtime={media.runtime}
 				score={media.vote_average}
 				url={"https://image.tmdb.org/t/p/w500" + media.poster_path}
@@ -115,7 +117,7 @@ const Moviedetails = () => {
 
 	// On appelle notre composant pour créer la partie crédit du film
 	const createSheetMovieCredits = (credits) => {
-		if (credits != credits.length) {
+		if (credits !== credits.length) {
 			return (
 				<CompSheetMovieCredits
 					cast={credits.cast}
@@ -158,13 +160,6 @@ const Moviedetails = () => {
 			{
 				data ? createSheet(data) : null
 			}
-			<div className="video">
-                <YoutubeEmbed embedId={trailer} />
-            </div>
-			{
-				credits ? createSheetMovieCredits(credits) : null
-			}
-
 			<CrudListProps
 				setMovieStatus={setMovieStatus}
 				setMovieProgress={setMovieProgress}
@@ -172,8 +167,13 @@ const Moviedetails = () => {
 				addMovie={addMovie}
 				crudList={crudList}
 				username={username}
-				className={isVisible ? null : 'hidden'}
 			/>
+			<div className="video">
+                <YoutubeEmbed embedId={trailer} />
+            </div>
+			{
+				credits ? createSheetMovieCredits(credits) : null
+			}
 		</div>
 	);
 }

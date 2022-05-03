@@ -24,10 +24,11 @@ export default function Login(props) {
 				/>
 
 				<button className="btn-cf" onClick={props.login}>Se connecter</button>
-
+			{/*
 			{props.loginStatus && (
 				<button onClick={props.userAuthenticated}>Check if authenticate</button>
-			)}
+			)}*/
+			}
 		</div>
 	);
 }

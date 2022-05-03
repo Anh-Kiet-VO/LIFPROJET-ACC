@@ -13,22 +13,12 @@ import { IconContext } from 'react-icons/lib';
 import '../style/navbar.css'
 
 /*
-	Barre de navigation vertical qui permet d'accéder à la section film ou série
+	Barre de navigation verticale qui permet d'accéder à la section film ou série
 */
 function Navbar() {
 	const [userlist, setUserlist] = useState([]);
 
 	const [loginUsername, setLoginUsername] = useState("")
-
-	/*userlist.filter(user => user.username == loginUsername)
-		.map((val, key) => {
-			return (
-				<div key={key} className="crud-list">
-					<Link to={`/profile/${val.id}`}><h1>{val.username}</h1></Link>
-				</div>
-			)
-		})
-		*/
 
 	useEffect(() => {
 		axios.get("http://localhost:3000/login") //1

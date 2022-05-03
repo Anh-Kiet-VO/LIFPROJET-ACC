@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Axios from "axios";
 
-import Register from '../components/register';
-import Login from '../components/login'
+import Register from '../components/Register';
+import Login from '../components/Login'
 
 import "../style/home.css";
 
@@ -26,6 +26,8 @@ function Home() {
 	const [openLogin, setOpenLogin] = useState(false);
 	const [openRegister, setOpenRegister] = useState(false);
 
+	const [inscrit, setInscrit] = useState("");
+
 	Axios.defaults.withCredentials = true;
 
 	// Requête vers l'API pour envoyer les données du nouveau utilisateur enregistré
@@ -34,7 +36,9 @@ function Home() {
 			username: usernameReg,
 			password: passwordReg,
 		}).then((response) => {
-			console.log(response)
+			console.log(response);
+			setInscrit(response.data);
+			console.log(inscrit);
 		});
 	};
 
@@ -137,6 +141,11 @@ function Home() {
 				<IconContext.Provider value={{ className: 'icon' }}>
 				<div className="register">
 					<button className="btn-close" onClick={() => { close(); }}><Vsc.VscChromeClose /></button>
+					{
+						inscrit && (
+							<span className="inscritOk">{inscrit}</span>
+						)
+					}
 					<>
 						<Register
 							setUsernameReg={setUsernameReg}

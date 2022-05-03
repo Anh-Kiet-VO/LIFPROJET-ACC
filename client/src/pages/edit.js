@@ -5,7 +5,7 @@ import Axios from 'axios';
 import '../style/crud.css';
 
 /*
-	Page pour éditer le film/série que nous avons dans la liste
+	Page pour éditer le film/série que nous avons dans notre liste
 */
 function Edit() {
 	// On récupère l'id présent dans l'url

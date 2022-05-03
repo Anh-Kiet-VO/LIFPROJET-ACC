@@ -6,10 +6,10 @@ import Axios from "axios"
 
 import CompSheetTv from '../components/CompSheetTv';
 import CompSheetTvCredits from "../components/CompSheetTvCredits";
-import CrudListProps from '../components/crudListProps';
+import CrudListProps from '../components/CrudListProps';
 
 import '../App.css';
-import '../Sheet.css';
+import '../style/sheet.css';
 
 /*
     Page permettant d'avoir les détails d'une série
@@ -55,6 +55,7 @@ const TVdetails = () => {
             });
     }
 
+    // On récupère le trailer
     const loadTrailer = async () => {
         await fetch(API_URL_TRAILER)
             .then(res => res.json())
@@ -65,6 +66,7 @@ const TVdetails = () => {
 
     const [isVisible, setVisible] = useState(false);
 
+    // Le code du trailer à afficher
     const YoutubeEmbed = ({ embedId }) => (
         <div className="video-responsive">
             <iframe
@@ -92,7 +94,7 @@ const TVdetails = () => {
             });
     }
 
-    // On appele notre composant pour créer la carte information de la série
+    // On appelle notre composant pour créer la carte information de la série
     const createSheet = (media) => {
         const addListCrud = () => {
             setVisible(!isVisible);
@@ -105,6 +107,7 @@ const TVdetails = () => {
                 title={media.name}
                 description={media.overview}
                 date={media.release_date}
+                seasons={media.number_of_seasons}
                 genres={media.genre_ids}
                 score={media.vote_average}
                 url={"https://image.tmdb.org/t/p/w500" + media.poster_path}
@@ -115,7 +118,7 @@ const TVdetails = () => {
 
     // On appelle notre composant pour créer la partie crédit de la série
     const createTvCredits = (credits) => {
-        if (credits != credits.length) {
+        if (credits !== credits.length) {
             return (
                 <CompSheetTvCredits
                     cast={credits.cast}

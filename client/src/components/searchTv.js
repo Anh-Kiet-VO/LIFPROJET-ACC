@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CardTv from "./cardTv"
+import CardTv from "./CardTv"
 
 /*
 	La barre de recherche qui va nous permettre de fetch la série
@@ -37,6 +37,7 @@ const SearchTv = () => {
 			});
 	}
 
+	// S'il n'y a pas d'image alors on met un placeholder à la place
 	const createCard = (movie) => {
 		if (movie.poster_path == null) {
 			return (

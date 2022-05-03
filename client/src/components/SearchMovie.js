@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import CardMovie from "./cardMovie"
+import CardMovie from "./CardMovie"
 import "../style/search.css";
 
 /*
@@ -25,7 +25,8 @@ const Search = () => {
 
 	const BASE_URL = "https://api.themoviedb.org/3";
 	const SEARCH_URL = BASE_URL + '/search/movie?' + API_KEY + `&query=${search}` + `&page=${currentPage}` + LANGUAGE;
-	const API_URL = `https://api.themoviedb.org/3/discover/movie?` + API_KEY + `&sort_by=popularity.desc&page=1` + LANGUAGE;/*+ '&sort_by=popularity.desc&page=1'*/
+	const API_URL = `https://api.themoviedb.org/3/discover/movie?` + API_KEY + `&sort_by=popularity.desc&page=1` + LANGUAGE;
+	/*+ '&sort_by=popularity.desc&page=1'*/
 
 	const getMovieInfo = (e) => {
 		const getId = e.currentTarget.attributes.id.value;
@@ -41,11 +42,11 @@ const Search = () => {
 			.then(res => res.json())
 			.then(data => {
 				setData(data);
-				setPageCount(Math.ceil(data.total_pages));
 				setIsLoaded(true);
 			});
 	}
 
+	// S'il n'y a pas d'image alors on met un placeholder à la place
 	const createCard = (movie) => {
 		if (movie.poster_path == null) {
 			return (
@@ -75,12 +76,6 @@ const Search = () => {
 		}
 	}
 
-	const handlePageChange = (selectedObject) => {
-		console.log(selectedObject.selected);
-		setCurrentPage(selectedObject.selected);
-		loadMovieData();
-	};
-
 	return (
 		<div className="search">
 			<div className="search-bar">
@@ -104,27 +99,6 @@ const Search = () => {
 					<div>Vous pouvez faire votre recherche...</div>
 				)
 				}
-
-				{isLoaded ? (
-					<ReactPaginate
-						pageCount={pageCount}
-						pageRange={1}
-						marginPagesDisplayed={2}
-						onPageChange={handlePageChange}
-						containerClassName={'container'}
-						previousLinkClassName={'page'}
-						breakClassName={'page'}
-						nextLinkClassName={'page'}
-						pageClassName={'page'}
-						disabledClassNae={'disabled'}
-						activeClassName={'active'}
-					/>
-				) : (
-					<div></div>
-				)}
-			</div>
-			<div className="pagination">
-				
 			</div>
 		</div>
 	)

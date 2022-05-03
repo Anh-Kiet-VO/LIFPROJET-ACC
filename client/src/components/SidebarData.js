@@ -4,7 +4,7 @@ import * as Bs from "react-icons/bs";
 import * as Fa from "react-icons/fa";
 
 /*
-	Affichage dans la barre de navigation vertical
+	Affichage dans la barre de navigation verticale
 */
 export const SidebarData = [
 	{

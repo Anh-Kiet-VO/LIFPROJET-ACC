@@ -1,3 +1,8 @@
+/*
+    Style pour le CRUD : ce qui permet d'ajouter, éditer et
+    supprimer de notre liste
+*/
+
 .crud-modal {
     width: 60%;
     margin: 0 auto 50px auto;
