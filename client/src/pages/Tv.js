@@ -92,7 +92,7 @@ function Tv() {
 	// Basculer sur la section Séries tendances
 	const togglePopular = () => {
 		var active = document.getElementsByClassName('is-active')[0];
-		if(active) active.classList.remove('is-active');
+		if (active) active.classList.remove('is-active');
 		document.activeElement.classList.add('is-active');
 		setPopular(true);
 		setSearch(false);
@@ -101,7 +101,7 @@ function Tv() {
 	// Basculer sur la barre de recherche
 	const toggleSearch = () => {
 		var active = document.getElementsByClassName('is-active')[0];
-		if(active) active.classList.remove('is-active');
+		if (active) active.classList.remove('is-active');
 		document.activeElement.classList.add('is-active');
 		setPopular(false);
 		setSearch(true);

@@ -17,6 +17,10 @@ import UserList from "./pages/Userlist";
 	Affiche la barre de navigation et met en place les différentes routes
 */
 
+/*
+	On initialise les routes ici.
+	Pour chaque chemin on va afficher des pages différentes
+*/
 function App() {
 
 	return (
