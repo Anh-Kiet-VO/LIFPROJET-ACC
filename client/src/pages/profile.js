@@ -29,7 +29,7 @@ function Profile() {
 				setUsername(response.data[0].username);
 			})
 
-	}, [])
+	}, [id])
 
 
 	return (
